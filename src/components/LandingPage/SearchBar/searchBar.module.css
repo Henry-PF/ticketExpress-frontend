@@ -1,0 +1,49 @@
+.form {
+    position: absolute;
+    bottom: -50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 80%;
+    height: 120px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px black;
+    background-color: white;
+}
+
+.form_input {
+    font-size: 1em;
+    padding: 10px;
+    border: 1px solid;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.form_input[type=date] {
+    width: 160px;
+}
+
+.form_input_date {
+    width: 160px;
+    font-size: 1em;
+    padding: 10px;
+    border: 1px solid;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.form_input[type=number] {
+    position: relative;
+    width: 100px;
+    text-align: center;
+}
+
+
+.form_input:focus,
+.form_input_date:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.7);
+
+}

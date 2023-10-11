@@ -1,0 +1,11 @@
+.carrousel_container {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.carrousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+}
