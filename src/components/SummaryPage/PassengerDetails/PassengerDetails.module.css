@@ -1,0 +1,35 @@
+.main {
+    display: inline-table;
+    justify-content: center;
+    align-items: center;
+}
+.InputGroup {
+    display: grid;
+    grid: repeat(3, 80px) / auto-flow 20rem;
+}
+.card {
+    display: flex;
+    margin-top: 3rem;
+    margin-left: 7rem;
+    max-width: 44rem;
+    min-height: 24rem;
+}
+.formGroup {
+    min-width: 14rem;
+    padding: 2rem;
+}
+
+.titleCard {
+    padding: 1rem;
+    margin-left: 1rem;
+}
+.buttonCompra {
+   max-width: 10rem;
+   max-height: 5rem;
+   padding: 1rem;
+}
+.buttonGroup{
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+}

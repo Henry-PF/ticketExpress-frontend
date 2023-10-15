@@ -1,0 +1,52 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.InputGroup {
+    padding-right: 5rem;
+    padding-left: 5rem;
+    padding-bottom: 2rem;
+}
+.card {
+    margin-top: 3rem;
+    margin-left: 3rem;
+    min-width: 34rem;
+    min-height: 24rem;
+}
+.formGroup {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.titleCard {
+    padding: 1rem;
+    margin-left: 1rem;
+}
+.buttons{
+    margin: 1rem;
+    background-color: transparent;
+    color: black;
+    border: 0rem;
+}
+.butonsGroup{
+
+}
+.parrafo{
+    display: flex;
+    margin: 1rem;
+    margin-left: 2rem;
+    text-decoration: none;
+    color: black;
+}
+.divHorarios{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.subDivHorarios{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
