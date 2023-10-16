@@ -21,7 +21,7 @@ const Carrousel = () => {
 
                 <Swiper
                     slidesPerView={3}
-                    spaceBetween={0}
+                    spaceBetween={30}
                     watchSlidesProgress={true}
                     centeredSlides={true}
                     loop={true}
