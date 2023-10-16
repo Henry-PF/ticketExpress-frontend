@@ -10,26 +10,27 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FcGoogle } from 'react-icons/fc';
 //----------Styles----------
 import styles from './navbar.module.css'
+import logo from '../../../assets/logo.png'
 
 const NavbarLanding = () => {
     const [show, setShow] = useState(false);
 
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar expand="lg" className={styles.navbar}>
                 <Container fluid>
-                    <Navbar.Brand href="#">TicketExpress</Navbar.Brand>
+                    <Navbar.Brand href="#"><img src={logo} className={styles.logo} alt="Logo Ticket Express" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll" className="justify-content-end">
                         <Nav
                             className="my-2 my-lg-0 "
                             navbarScroll
                         >
-                            <Nav.Link href="#">HOME</Nav.Link>
-                            <Nav.Link href="#">Link</Nav.Link>
-                            <Nav.Link href="#">ABOUT US</Nav.Link>
-                            <Nav.Link href="#" onClick={() => setShow(!show)}>
-                                SIGN IN
+                            <Nav.Link className={styles.nav_links} href="/">HOME</Nav.Link>
+                            <Nav.Link className={styles.nav_links} href="/create_route">CREAR RUTA</Nav.Link>
+                            <Nav.Link className={styles.nav_links} href="#">SOBRE NOSOTROS</Nav.Link>
+                            <Nav.Link className={styles.nav_links} href="#" onClick={() => setShow(!show)}>
+                                INICIAR SESIÓN
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -56,7 +57,7 @@ const NavbarLanding = () => {
                             </Button>
                         </Form>
                         <div className='d-flex flex-column'>
-                            <p className=''>¿Eres nuevo en TicketExpress? <a href="">Registrarse</a></p>
+                            <p className=''>¿Eres nuevo en TicketExpress? <a href="/register">Registrarse</a></p>
                             <p>Ovidaste tu contraseña? <a href="">Recuperar Contraseña</a></p>
                         </div>
                     </Offcanvas.Body>
