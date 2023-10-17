@@ -3,13 +3,14 @@ import NavbarLanding from '../../LandingPage/Navbar/NavbarLanding';
 import PassengerDetails from '../PassengerDetails/PassengerDetails';
 import TicketDetail from '../TicketDetail/TicketDetail';
 import styles from "./Summary.module.css";
+
 const Summary = () => {
     return (
         <main >
-            <NavbarLanding/>
+            <NavbarLanding />
             <div className={styles.summary}>
-            <PassengerDetails/>
-            <TicketDetail/>
+                <PassengerDetails />
+                <TicketDetail />
             </div>
         </main>
     )

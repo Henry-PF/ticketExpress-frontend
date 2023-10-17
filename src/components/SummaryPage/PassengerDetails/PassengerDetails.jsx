@@ -1,5 +1,6 @@
 import { Container, Card, CardTitle, InputGroup, FormLabel, FormControl, FormGroup, Button, ButtonGroup } from "react-bootstrap"
 import styles from "./PassengerDetails.module.css"
+import img from '../../../assets/seat.jpg'
 
 
 const PassengerDetails = () => {
@@ -34,9 +35,12 @@ const PassengerDetails = () => {
                     </FormGroup>
                 </InputGroup>
             </Card>
+            <img src={img} />
+
             <ButtonGroup className={styles.buttonGroup}>
-                  <Button className={styles.buttonCompra}>Comprar</Button>
+                <Button className={styles.buttonCompra}>Comprar</Button>
             </ButtonGroup>
+
         </Container>
 
     )

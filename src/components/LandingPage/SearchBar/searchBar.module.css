@@ -20,8 +20,6 @@
     color: rgba(0, 0, 0, 0.5);
 }
 
-
-
 .form_input[type=date] {
     width: 160px;
 }
@@ -50,4 +48,22 @@
     border: 1px solid white;
     color: rgba(0, 0, 0, 0.7);
 
+}
+
+.btn_submit {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 0;
+    border: 1px solid white;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: white;
+}
+
+.btn_submit:hover {
+
+    color: var(--primary);
+    border: 1px solid white;
+    background-color: white;
 }

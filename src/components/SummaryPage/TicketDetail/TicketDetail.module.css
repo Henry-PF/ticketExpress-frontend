@@ -1,52 +1,76 @@
 .main {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
+
 .InputGroup {
-    padding-right: 5rem;
-    padding-left: 5rem;
-    padding-bottom: 2rem;
+    width: 61%;
 }
+
 .card {
-    margin-top: 3rem;
-    margin-left: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 34rem;
     min-height: 24rem;
 }
+
 .formGroup {
     display: flex;
-    justify-content: space-between;
-    padding: 1rem;
+    justify-content: space-evenly;
+    margin: 0;
+
+}
+
+.formGroup p {
+    margin: 0;
+    padding: 5px;
 }
 
 .titleCard {
     padding: 1rem;
     margin-left: 1rem;
 }
-.buttons{
+
+.buttons {
     margin: 1rem;
     background-color: transparent;
     color: black;
     border: 0rem;
 }
-.butonsGroup{
 
-}
-.parrafo{
+.trip {
     display: flex;
-    margin: 1rem;
-    margin-left: 2rem;
-    text-decoration: none;
-    color: black;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
-.divHorarios{
+
+.trip span {
+    color: var(--primary);
+    font-size: 1.5em;
+}
+
+.divHorarios {
+    width: 80%;
     display: flex;
-    justify-content: space-around;
-    padding: 1rem;
+    justify-content: center;
 }
-.subDivHorarios{
-    padding-left: 1rem;
-    padding-right: 1rem;
+
+.subDivHorarios {
+    padding: 1em;
+    border: 1px solid black;
     text-align: center;
+}
+
+.subDivHorarios h5 {
+    font-size: 2em;
+}
+
+.dataTime {
+    border: 1px solid black;
+}
+
+hr {
+    margin: 5px;
 }

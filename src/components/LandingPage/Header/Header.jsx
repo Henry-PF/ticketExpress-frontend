@@ -1,6 +1,7 @@
 import React from 'react'
 import headerImg from '../../../assets/HomeBannerImg.svg'
 import SearchBar from '../SearchBar/SearchBar'
+
 const Header = () => {
     return (
         <>
