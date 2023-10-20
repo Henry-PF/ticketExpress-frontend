@@ -5,8 +5,7 @@ export default function Selection(){
     return(
         <div className={styles.container}>
             <div>
-                <h1>INSERTAR NAV, SACAR FONDO FEO Y MEJORAR ESTILOS DE LAS CAJAS</h1>
-                <br /> <br />
+                <h1>INSERTAR NAV, SACAR FONDO FEO, SACAR CAJA DE ELIMINAR, AGREGAR BOTON DE BACK A TODO Y MODIFICAR COLORES Y TAMAÑO DE LAS OTRAS 2 CAJAS</h1>
             </div>
 
             <div className={styles.div1}>
@@ -19,11 +18,11 @@ export default function Selection(){
             </div>
 
             <div className={styles.div2}>
-                <h2 className={styles.h2}>EDITAR</h2>
+                <h2 className={styles.h2}>EDITAR O ELIMINAR</h2>
                 <p class="d-inline-flex gap-1">
-                    <a href="/" class="btn btn-warning" role="button" data-bs-toggle="button">EMPRESA</a>
-                    <a href="/" class="btn btn-warning" role="button" data-bs-toggle="button">COLECTIVO</a>
-                    <a href="/" class="btn btn-warning" role="button" data-bs-toggle="button">RUTA</a>
+                    <a href="/modify_company" class="btn btn-warning" role="button" data-bs-toggle="button">EMPRESA</a>
+                    <a href="/modify_bus" class="btn btn-warning" role="button" data-bs-toggle="button">COLECTIVO</a>
+                    <a href="/modify_route" class="btn btn-warning" role="button" data-bs-toggle="button">RUTA</a>
                 </p>
             </div>
 
@@ -46,8 +45,6 @@ export default function Selection(){
                         Quidem itaque delectus soluta ipsum molestias temporibus necessitatibus odio iste placeat iusto.</h6>
                 </div>
             </footer>
-
-
         </div>
     )
 }
