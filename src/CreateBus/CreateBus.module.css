@@ -38,3 +38,9 @@
     border: 1px solid;
     color: rgba(0, 0, 0, 0.5);
 }
+
+.botonBack {
+    text-align: right;
+    margin-top: 165px;
+    margin-right: 5px;
+}

@@ -8,7 +8,7 @@ export default function ModifyCompany(){
     return(
         <div className={styles.div}>
             <div>
-                <h1>ACA VA EL NAV</h1>
+                <h1>AGREGAR PAGINADO PORQUE VAN A SER MUCHOS DATOS, BOTON DE VOLVER Y FUNCIONALIDAD A LOS BOTONES CUANDO SE SUME EL REDUX</h1>
             </div>
 
             <table className={styles.table}>
@@ -91,7 +91,6 @@ export default function ModifyCompany(){
                     <td className={styles.td}><FontAwesomeIcon icon={faPencil} style={{color: "#dedb2b",}} /></td>
                     <td className={styles.td}><FontAwesomeIcon icon={faTrash} style={{color: "#dd3636",}} /></td>
                 </tr>
-
             </table>
         </div>
     )

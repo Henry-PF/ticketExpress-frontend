@@ -73,10 +73,11 @@ export default function CreateRoute(){
                     <Button className='w-100 my-4' variant="primary" type="submit">
                         Crear Ruta
                     </Button>
-
-                    {/*AGREGAR BOTON PARA VOLVER ATRAS*/}
                 </div>
             </Form>
+            <div className={styles.botonBack}>
+                <a href="/" class="btn btn-primary" role="button" data-bs-toggle="button">Volver</a>
+            </div>
         </div>
     )
 }
