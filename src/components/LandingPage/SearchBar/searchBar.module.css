@@ -1,60 +1,44 @@
 .form {
-    position: absolute;
-    bottom: -50px;
+    position: sticky;
+    top: 83px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    width: 80%;
+    width: 100%;
     height: 120px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px black;
+    padding: 20px;
     background-color: var(--primary);
+    z-index: 10;
 }
 
 .form_input {
-    font-size: 1em;
-    padding: 10px;
-    border-radius: 0;
-    border: 1px solid white;
-    color: rgba(0, 0, 0, 0.5);
+    [class$="-control"] {
+        min-width: 250px;
+        height: 50px;
+    }
 }
 
-.form_input[type=date] {
-    width: 160px;
-}
-
-.form_input_date {
-    width: 160px;
-    font-size: 1em;
-    padding: 10px;
-    border: 1px solid white;
-    border-radius: 0;
-    color: rgba(0, 0, 0, 0.5);
+.form_input:focus {
+    [class$="-control"] {
+        box-shadow: none;
+        border: none;
+    }
 }
 
 .form_input[type=number] {
     position: relative;
-    border-radius: 0;
+    border-radius: 2px;
     width: 100px;
+    height: 50px;
     text-align: center;
-}
-
-
-.form_input:focus,
-.form_input_date:focus {
-    outline: none;
-    box-shadow: 1px 1px 1px white;
-    border: 1px solid white;
-    color: rgba(0, 0, 0, 0.7);
-
 }
 
 .btn_submit {
     display: flex;
     align-items: center;
     font-size: 1em;
-    padding: 10px;
+    height: 50px;
     border-radius: 0;
     border: 1px solid white;
     color: rgba(0, 0, 0, 0.5);
@@ -62,8 +46,55 @@
 }
 
 .btn_submit:hover {
-
     color: var(--primary);
     border: 1px solid white;
     background-color: white;
+}
+
+.formGroup {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    text-align: center;
+}
+
+.select {
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    color: rgba(0, 0, 0, 0.5);
+
+}
+
+.formGroupCount {
+    display: flex;
+    width: 100%;
+    text-align: center;
+}
+
+.count {
+    height: 50px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.btn_count {
+    height: 50px;
+    border: none;
+    background-color: transparent;
+}
+
+.btn_icon {
+    font-size: 3em;
+    color: white;
+    border-radius: 50%;
+    transition: all .3s ease;
+}
+
+.btn_icon:hover {
+    border-radius: 50%;
+    background-color: white;
+    color: var(--primary);
 }

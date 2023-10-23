@@ -1,4 +1,4 @@
-import { SEARCH_RESULTS } from './action-types'
+import { GET_CITIES, GET_PROVINCE, SEARCH_RESULTS, USER_LOGIN, USER_REGISTER } from './action-types'
 
 const initialState = {
     trips: [
@@ -123,11 +123,56 @@ const initialState = {
         {
             id: 10,
             origin: "Buenos Aires",
-            destination: "Cordoba",
-            departureDate: "2023-11-02",
+            destination: "Córdoba",
+            departureDate: "2/11/2023",
             returnDate: "2023-11-03",
             departureTime: "13:00",
-            arrivalTime: "15: 30"
+            arrivalTime: "15:30"
+        },
+        {
+            id: 10,
+            origin: "Buenos Aires",
+            destination: "Córdoba",
+            departureDate: "2/11/2023",
+            returnDate: "2023-11-03",
+            departureTime: "13:00",
+            arrivalTime: "15:30"
+        },
+        {
+            id: 10,
+            origin: "Buenos Aires",
+            destination: "Córdoba",
+            departureDate: "2/11/2023",
+            returnDate: "2023-11-03",
+            departureTime: "13:00",
+            arrivalTime: "15:30"
+        },
+        {
+            id: 10,
+            origin: "Buenos Aires",
+            destination: "Córdoba",
+            departureDate: "2/11/2023",
+            returnDate: "2023-11-03",
+            departureTime: "13:00",
+            arrivalTime: "16:30"
+        },
+        {
+            id: 10,
+            origin: "Buenos Aires",
+            destination: "Córdoba",
+            departureDate: "2/11/2023",
+            returnDate: "2023-11-03",
+            departureTime: "18:00",
+            arrivalTime: "02:30"
+        },
+        {
+            id: 10,
+            origin: "Buenos Aires",
+            destination: "Córdoba",
+            departureDate: "2/11/2023",
+            returnDate: "2023-11-03",
+            departureTime: "20:00",
+            arrivalTime: "03:30"
         },
         {
             i: 11,
@@ -212,9 +257,10 @@ const initialState = {
         },
     ],
     data: [],
-
+    cities: [],
+    province: [],
+    userGoogle: {},
 };
-
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case SEARCH_RESULTS:
@@ -227,12 +273,24 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 data: filter,
             };
-
-
+        case USER_LOGIN:
+            return {
+                ...state,
+                userGoogle: action.payload,
+            }
+        case GET_CITIES:
+            return {
+                ...state,
+                cities: action.payload,
+            }
+        case GET_PROVINCE:
+            return {
+                ...state,
+                province: action.payload,
+            }
         default:
             return state;
     }
 };
-console.log(initialState.data);
 
 export default rootReducer;

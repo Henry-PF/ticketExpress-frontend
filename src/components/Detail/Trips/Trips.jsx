@@ -15,6 +15,7 @@ export default function Trips() {
     return (
         <div>
             <NavbarLanding />
+            <SearchBar />
 
             <div className={styles.home}>
                 <div>

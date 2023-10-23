@@ -26,11 +26,11 @@ const Carrousel = () => {
         <>
             <div className={styles.carrousel_container}>
 
-                <h1 className='m-5'>DESTINOS MAS BUSCADOS</h1>
+                <h1 className='text-center m-5'>DESTINOS MAS BUSCADOS</h1>
 
                 <Swiper
                     slidesPerView={3}
-                    spaceBetween={30}
+                    spaceBetween={5}
                     watchSlidesProgress={true}
                     centeredSlides={true}
                     loop={true}
@@ -44,7 +44,7 @@ const Carrousel = () => {
                         <Card style={{ width: '100%', height: '100%', borderRadius: 'none', border: 'none' }}>
                             <Card.Img variant="top" className={styles.img} src={cordoba} />
                             <Card.Body className={styles.card_body}>
-                                <Card.Title>CORDOBA</Card.Title>
+                                <Card.Title className='text-center'>CORDOBA</Card.Title>
                                 <Card.Text className={styles.cities}>
                                     <a href="#">Villa Carlos Paz</a>
                                     <a href="#">Cosquin</a>
@@ -57,7 +57,7 @@ const Carrousel = () => {
                         <Card style={{ width: '100%', height: '100%', borderRadius: 'none', border: 'none' }}>
                             <Card.Img variant="top" className={styles.img} src={buenosAires} />
                             <Card.Body className={styles.card_body}>
-                                <Card.Title>BUENOS AIRES</Card.Title>
+                                <Card.Title className='text-center'>BUENOS AIRES</Card.Title>
                                 <Card.Text className={styles.cities}>
                                     <a href="#">Mar del Plata</a>
                                     <a href="#">La Boca</a>
@@ -70,7 +70,7 @@ const Carrousel = () => {
                         <Card style={{ width: '100%', height: '100%', borderRadius: 'none', border: 'none' }}>
                             <Card.Img variant="top" className={styles.img} src={mendoza} />
                             <Card.Body className={styles.card_body}>
-                                <Card.Title>MENDOZA</Card.Title>
+                                <Card.Title className='text-center'>MENDOZA</Card.Title>
                                 <Card.Text className={styles.cities}>
                                     <a href="#">Luján de Cuyo</a>
                                     <a href="#">Las Heras</a>
@@ -83,7 +83,7 @@ const Carrousel = () => {
                         <Card style={{ width: '100%', height: '100%', borderRadius: 'none', border: 'none' }}>
                             <Card.Img variant="top" className={styles.img} src={rioNegro} />
                             <Card.Body className={styles.card_body}>
-                                <Card.Title>RIO NEGRO</Card.Title>
+                                <Card.Title className='text-center'>RIO NEGRO</Card.Title>
                                 <Card.Text className={styles.cities}>
                                     <a href="#">San Carlos de Bariloche</a>
                                     <a href="#">El Bolsón</a>
@@ -96,7 +96,7 @@ const Carrousel = () => {
                         <Card style={{ width: '100%', height: '100%', borderRadius: 'none', border: 'none' }}>
                             <Card.Img variant="top" className={styles.img} src={sanJuan} />
                             <Card.Body className={styles.card_body}>
-                                <Card.Title>SAN JUAN</Card.Title>
+                                <Card.Title className='text-center'>SAN JUAN</Card.Title>
                                 <Card.Text className={styles.cities}>
                                     <a href="#">Rodeo</a>
                                     <a href="#">Las Flores</a>
@@ -109,7 +109,7 @@ const Carrousel = () => {
                         <Card style={{ width: '100%', height: '100%', borderRadius: 'none', border: 'none' }}>
                             <Card.Img variant="top" className={styles.img} src={tucuman} />
                             <Card.Body className={styles.card_body}>
-                                <Card.Title>TUCUMÁN</Card.Title>
+                                <Card.Title className='text-center'>TUCUMÁN</Card.Title>
                                 <Card.Text className={styles.cities}>
                                     <a href="#">Famaillá</a>
                                     <a href="#">Yerba Buena</a>

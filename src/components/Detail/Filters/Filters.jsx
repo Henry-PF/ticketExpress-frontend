@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import ReactSlider from "react-slider";
 import { useState } from "react";
 import styles from "./Filters.module.css";
+import Form from 'react-bootstrap/Form';
+import Accordion from 'react-bootstrap/Accordion';
 
 //POR AHORA SOLO VISUAL
 //AGREGAR LUEGO FUNCIONES DE FILTRADO QUE VENDRAN LUEGO DESDE EL BACK
@@ -15,26 +17,62 @@ export default function Filters() {
         <Fragment>
             <div className={styles.div}>
                 <h4 className={styles.h4}>Filtros de Busqueda</h4>
-                <div className="form-check">
-                    <label className={styles.label}>Empresas</label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="all" /> Todas </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="condor" /> Condor Estrella </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="aguila" /> El Aguila </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="flecha" /> Flecha Bus </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="plusmar" /> Plusmar </label> <br />
-                </div>
-
-                <br />
-
-                <div className="form-check">
-                    <label className={styles.label}>Categorias</label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="all" /> Todas </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="cama" /> Cama </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="semicama" /> Semicama </label> <br />
-                    <label className="form-check-label"><input className="form-check-input" type="checkbox" value="suite" /> Suite </label> <br />
-                </div>
-
-                <br />
+                <Accordion className={styles.accordionContainer} defaultActiveKey={['0']} alwaysOpen>
+                    <Accordion.Item className={styles.accordion} eventKey="0">
+                        <Accordion.Header>Empresas</Accordion.Header>
+                        <Accordion.Body>
+                            <Form>
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    id="todas"
+                                    label="Todas"
+                                    defaultChecked
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Empresa 1"
+                                    id="Empresa 1"
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Empresa 2"
+                                    id="custom-switch"
+                                />
+                            </Form>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+                <Accordion className={styles.accordionContainer} defaultActiveKey={['0']} alwaysOpen>
+                    <Accordion.Item className={styles.accordion} eventKey="0">
+                        <Accordion.Header>Categoria</Accordion.Header>
+                        <Accordion.Body>
+                            <Form>
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    id="custom-switch"
+                                    label="Todas"
+                                    defaultChecked
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Semi-cama"
+                                    id="custom-switch"
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Cama"
+                                    id="custom-switch"
+                                />
+                            </Form>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
 
                 <div className="form-check">
                     <label className={styles.label}>Horarios</label>

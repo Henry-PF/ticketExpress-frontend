@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 export default function Card(props) { //recibira datos como id, empresa, origen, destino, categoria, butacas libres, precio (ver bien DB)
     const departureTime = new Date(`2000-01-01T${props.departureTime}`);
     const arrivalTime = new Date(`2000-01-01T${props.arrivalTime}`);
-
+    console.log(props.arrivalTime);
+    console.log(departureTime, arrivalTime);
     // Si la hora de llegada es anterior a la hora de salida, ajusta la fecha de llegada al día siguiente
     if (arrivalTime < departureTime) {
         arrivalTime.setDate(arrivalTime.getDate() + 1);
@@ -29,11 +30,11 @@ export default function Card(props) { //recibira datos como id, empresa, origen,
     moment.locale("es");
 
     // Convierte la fecha de salida y hora de salida al formato deseado
-    const departureDateFormatted = moment(props.departureDate).format("dddd DD/MM");
+    const departureDateFormatted = moment(props.departureDate).format("dddd MM/DD");
     const departureTimeFormatted = moment(props.departureTime, "HH:mm").format("HH:mm");
 
     // Calcula la fecha y hora de llegada sumando el tiempo de viaje
-    const departureDateTime = moment(props.departureDate + " " + props.departureTime, "YYYY-MM-DD HH:mm");
+    const departureDateTime = moment(props.departureDate + " " + props.departureTime, "DD/MM/YYYY HH:mm");
     const arrivalDateTime = departureDateTime.clone().add(travelTime, "hours");
 
     // Comprueba si la hora de llegada es anterior a la hora de salida y ajusta la fecha en consecuencia

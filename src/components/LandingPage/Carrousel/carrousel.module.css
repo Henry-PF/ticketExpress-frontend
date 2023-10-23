@@ -1,5 +1,6 @@
 .carrousel_container {
     margin-top: 200px;
+    z-index: -1;
 
 }
 
@@ -11,12 +12,15 @@
 }
 
 .item {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    z-index: -10;
 }
 
 .cities {
     display: flex;
     flex-direction: column;
+
+
 }
 
 .img {

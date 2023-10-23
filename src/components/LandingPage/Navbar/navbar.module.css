@@ -16,10 +16,11 @@
 .nav_links {
     list-style: none;
     font-size: 1.1em;
+    color: var(--secondary) !important;
 }
 
 .nav_links:hover {
-    color: var(--primary);
+    color: var(--primary) !important;
 }
 
 .form_input {
@@ -38,20 +39,30 @@
 }
 
 .btn_submit {
+    display: block;
+    color: var(--primary);
+    text-align: center;
+    text-decoration: none;
     width: 100%;
     padding: .8em;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 0;
-    background-color: gray;
-    margin-bottom: 1.5em;
+    background-color: white;
+    margin-bottom: 1em;
+    transition: all .3s ease;
 }
 
 .btn_submit:hover {
-    background-color: black;
+    color: white;
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
 }
 
 .btn_google {
     position: relative;
+    display: block;
+    text-align: center;
+    text-decoration: none;
     width: 100%;
     padding: .8em;
     color: #4285F4;
@@ -59,9 +70,11 @@
     border-radius: 0;
     background-color: white;
     margin-bottom: 1.5em;
+    transition: all .3s ease;
 }
 
 .btn_google:hover {
+    color: white;
     border: 1px solid rgb(160, 195, 255);
     background-color: rgb(160, 195, 255);
 }

@@ -1,15 +1,19 @@
 import React from 'react'
 import headerImg from '../../../assets/HomeBannerImg.svg'
+import logo from '../../../assets/logo.png'
 import SearchBar from '../SearchBar/SearchBar'
+import styles from './header.module.css'
 
 const Header = () => {
     return (
         <>
-            <div className='d-flex position-relative items-center justify-content-center'>
+            <div className={styles.header}>
+                <picture className={styles.logo}>
+                    <img src={logo} alt="" />
+                </picture>
                 <img src={headerImg} alt="" />
-                <SearchBar />
-
             </div>
+            <SearchBar />
         </>
     )
 }
