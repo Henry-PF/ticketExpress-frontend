@@ -22,13 +22,6 @@ function App() {
           <Route exact path='/register' element={<Register />} />
           <Route exact path="/ticket_detail/:id" element={<Summary />} />
           <Route exact path='/create_route' element={<CreateRoute />} />
-
-          <Route path='/create_company' element={<CreateCompany />} />
-          <Route path='/create_bus' element={<CreateBus />} />
-          <Route path='/create_route' element={<CreateRoute />} />
-          <Route path='/modify_company' element={<ModifyCompany />} />
-          <Route path='/modify_bus' element={<ModifyBus />} />
-          <Route path='/modify_route' element={<ModifyRoute />} />
         </Routes>
       </div>
   );
