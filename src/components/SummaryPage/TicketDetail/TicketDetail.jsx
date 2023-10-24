@@ -10,22 +10,20 @@ import styles from "./TicketDetail.module.css"
 const TicketDetail = () => {
     const { id } = useParams();
 
-    const results = useSelector(state => state.data);
-    console.log('Boleto', results);
-    const ticket = results?.find((result) => result.id == id);
+    const results = useSelector(state => state.results);
 
+    const ticket = results.data?.find((result) => result.id == id);
 
-    const departureTime = new Date(`01/01/2000T${ticket.departureTime}`);
-    const arrivalTime = new Date(`1/1/2000T${ticket.arrivalTime}`);
+    const hora_salida = new Date(`2000-01-01T${ticket.hora_salida}`);
+    const hora_llegada = new Date(`2000-01-01T${ticket.hora_llegada}`);
 
-    console.log(departureTime);
     // Si la hora de llegada es anterior a la hora de salida, ajusta la fecha de llegada al día siguiente
-    if (arrivalTime < departureTime) {
-        arrivalTime.setDate(arrivalTime.getDate() + 1);
+    if (hora_llegada < hora_salida) {
+        hora_llegada.setDate(hora_llegada.getDate() + 1);
     }
 
     // Calcula la diferencia en milisegundos entre la hora de llegada y la hora de salida
-    const timeDifference = arrivalTime - departureTime;
+    const timeDifference = hora_llegada - hora_salida;
 
     // Convierte la diferencia en horas y minutos
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
@@ -38,11 +36,11 @@ const TicketDetail = () => {
     moment.locale("es");
 
     // Convierte la fecha de salida y hora de salida al formato deseado
-    const departureDateFormatted = moment(ticket.departureDate, "DD/MM/YYYY").format("dddd DD/MM");
-    const departureTimeFormatted = moment(ticket.departureTime, "HH:mm").format("HH:mm");
+    const departureDateFormatted = moment(ticket.fecha_salida, "DD/MM/YYYY").format("dddd DD/MM");
+    const hora_salidaFormatted = moment(ticket.hora_salida, "HH:mm").format("HH:mm");
 
     // Calcula la fecha y hora de llegada sumando el tiempo de viaje
-    const departureDateTime = moment(ticket.departureDate + " " + ticket.departureTime, "DD/MM/YYYY HH:mm");
+    const departureDateTime = moment(ticket.fecha_salida + " " + ticket.hora_salida, "DD/MM/YYYY HH:mm");
     const arrivalDateTime = departureDateTime.clone().add(travelTime, "hours");
 
     // Comprueba si la hora de llegada es anterior a la hora de salida y ajusta la fecha en consecuencia
@@ -67,12 +65,12 @@ const TicketDetail = () => {
                 <div className={styles.divHorarios}>
                     <div className={styles.subDivHorarios}>
                         <p>Horario de Salida</p>
-                        <h5> {ticket.departureTime} hs</h5>
+                        <h5> {ticket.hora_salida} hs</h5>
                         <p>{departureDateFormatted}</p>
                     </div>
                     <div className={styles.subDivHorarios}>
                         <p>Horario de Llegada</p>
-                        <h5> {ticket.arrivalTime} hs</h5>
+                        <h5> {ticket.hora_llegada} hs</h5>
                         <p>{arrivalDateFormatted}</p>
                     </div>
                 </div>
@@ -101,7 +99,7 @@ const TicketDetail = () => {
                         </tr>
                         <tr>
                             <td>SubTotal</td>
-                            <td>$10000</td>
+                            <td>$ {ticket.precio}</td>
                         </tr>
                     </tbody>
                 </Table>

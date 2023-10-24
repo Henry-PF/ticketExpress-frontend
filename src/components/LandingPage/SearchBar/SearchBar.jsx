@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select'
 import DatePicker from "react-datepicker";
 import CreatableSelect from 'react-select/creatable';
 import Form from 'react-bootstrap/Form';
-import { getCities, getProvince, searchResults } from '../../../Redux/actions';
+import { getBoletos, getCities, searchResults } from '../../../Redux/actions';
 import { FiUserPlus } from 'react-icons/fi'
 import { BsSearch, BsPlus, BsDash } from 'react-icons/bs'
 
 import styles from './searchBar.module.css'
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from 'react-bootstrap';
+import moment from 'moment';
 
 
-const SearchBar = () => {
+const SearchBar = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const cities = useSelector(state => state.cities.data);
-    const province = useSelector(state => state.province.data);
+    const cities = useSelector(state => state.cities);
+    // const province = useSelector(state => state.province.data);
 
     let data = [];
 
-    if (cities && province) {
-        data = [...cities, ...province];
+    if (cities) {
+        data = [...cities];
     }
 
+    console.log('Fecha', props.fecha_salida);
     const [startDate, setStartDate] = useState(null);
     const [returnDate, setReturnDate] = useState(null);
-
     const [searchQuery, setSearchQuery] = useState({
-        origin: '',
-        destination: '',
-        departureDate: '',
-        returnDate: ''
+        origen: '',
+        destino: '',
+        fecha_salida: '',
+        fecha_regreso: '',
     });
-
     const [count, setCount] = useState(1);
+
+    useEffect(() => {
+        dispatch(getCities());
+    }, [dispatch, startDate]);
 
     const increment = () => {
         setCount(count + 1);
@@ -50,24 +54,24 @@ const SearchBar = () => {
     const handleSearch = (event) => {
         event.preventDefault();
         dispatch(searchResults(searchQuery));
-        navigate('/results');
+        navigate(`/results`);
     };
 
     const handleDate = (date) => {
-        const formatDate = date.toLocaleDateString().split('T')[0];
-        setStartDate(date)
-        setSearchQuery({ ...searchQuery, departureDate: formatDate })
+        if (date) {
+            const formatDate = date.toLocaleDateString().split('T')[0];;
+            setStartDate(date)
+            setSearchQuery({ ...searchQuery, fecha_salida: formatDate })
+        } else {
+            setStartDate(null)
+        }
     }
+
     const handleReturnDate = (date) => {
         const formatDate = date.toLocaleDateString().split('T')[0];
         setReturnDate(date)
-        setSearchQuery({ ...searchQuery, returnDate: formatDate })
+        setSearchQuery({ ...searchQuery, fecha_regreso: formatDate })
     }
-
-    useEffect(() => {
-        dispatch(getCities());
-        dispatch(getProvince());
-    }, [dispatch])
 
     return (
         <>
@@ -75,18 +79,19 @@ const SearchBar = () => {
                 <Form.Group className={styles.formGroup} controlId="formBasicEmail">
                     <Form.Label className='text-white'>Ciudad de Origen</Form.Label>
                     <Select
+                        defaultValue={searchQuery.origen}
                         className={styles.form_input}
                         isClearable
                         options={data?.map(city => ({
-                            value: city.nombre,
+                            value: city.id,
                             label: city.nombre
                         }))}
                         placeholder='Ciudad de Origen'
                         onChange={(selectedOption) => {
                             if (selectedOption) {
-                                setSearchQuery({ ...searchQuery, origin: selectedOption.value });
+                                setSearchQuery({ ...searchQuery, origen: selectedOption.value });
                             } else {
-                                setSearchQuery({ ...searchQuery, origin: '' });
+                                setSearchQuery({ ...searchQuery, origen: '' });
                             }
                         }}
                         required
@@ -99,15 +104,15 @@ const SearchBar = () => {
                         className={styles.form_input}
                         isClearable
                         options={data?.map(city => ({
-                            value: city.nombre,
+                            value: city.id,
                             label: city.nombre
                         }))}
                         placeholder='Ciudad de Destino'
                         onChange={(selectedOption) => {
                             if (selectedOption) {
-                                setSearchQuery({ ...searchQuery, destination: selectedOption.value });
+                                setSearchQuery({ ...searchQuery, destino: selectedOption.value });
                             } else {
-                                setSearchQuery({ ...searchQuery, destination: '' });
+                                setSearchQuery({ ...searchQuery, destino: '' });
                             }
                         }}
                         required
@@ -136,8 +141,9 @@ const SearchBar = () => {
                         // maxDate={addMonths(new Date(), 1)}
                         dateFormat="dd/MM/yyyy"
                         className={styles.select}
-                        placeholderText='Fecha de Salida'
+                        placeholderText='Fecha de Regreso'
                         showDisabledMonthNavigation
+                        isClearable
                     />
                 </Form.Group>
                 <Form.Group className={styles.formGroup} controlId="formBasicPassword">
