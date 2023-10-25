@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Container, Card, Button, ButtonGroup } from "react-bootstrap";
 import moment from "moment";
 import "moment/locale/es";
-import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
-import Table from 'react-bootstrap/Table';
-import styles from "./TicketDetail.module.css"
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import Table from "react-bootstrap/Table";
+import styles from "./TicketDetail.module.css";
 
 const TicketDetail = () => {
     const { id } = useParams();
