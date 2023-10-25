@@ -2,14 +2,18 @@ import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import styles from './styles.module.css'
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const BtnUserLoggedIn = (props) => {
 
     const handleClick = () => {
         localStorage.clear();
         window.location.reload();
+        Cookies.remove('userData');
+        axios.post('http://localhost:3001/auth/logout')
     }
-
+    console.log(props.name);
     return (
         <>
             <Dropdown>

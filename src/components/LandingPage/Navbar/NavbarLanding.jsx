@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
+import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.png'
 //----------Boostrap----------
@@ -24,13 +25,14 @@ const NavbarLanding = () => {
     const dispatch = useDispatch();
     const userGoogle = useSelector(state => state.userGoogle);
 
+    const [user, setUser] = useState(null)
     const [token, setToken] = useState('')
     const [show, setShow] = useState(false);
     const [userData, setUserData] = useState({
         email: "",
         password: "",
     });
-
+    console.log(user?.displayName);
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { email, password } = userData;
@@ -47,13 +49,21 @@ const NavbarLanding = () => {
                 localStorage.setItem('apellido', data.data.apellido);
                 localStorage.setItem('correo', data.data.correo);
                 window.location.reload();
-            } else {
-
             }
+
         } catch (error) {
             console.log(error);
         };
     }
+
+    useEffect(() => {
+        // Leer la cookie con la información del usuario
+        const userData = Cookies.get('userData');
+        if (userData) {
+            const parsedUser = JSON.parse(userData);
+            setUser(parsedUser);
+        }
+    }, []);
 
     return (
         <>
@@ -70,8 +80,8 @@ const NavbarLanding = () => {
                             <Nav.Link className={styles.nav_links} href="/create_route">Crear Ruta</Nav.Link>
                             <Nav.Link className={styles.nav_links} href="#">Sobre Nosotros</Nav.Link>
                             {
-                                localStorage.getItem('token')
-                                    ? <BtnUserLoggedIn name={localStorage.getItem('nombre')} />
+                                localStorage.getItem('token') || user
+                                    ? localStorage.getItem('nombre') ? <BtnUserLoggedIn name={localStorage.getItem('nombre')} /> : <BtnUserLoggedIn name={user?.name.givenName} />
                                     : <Nav.Link className={styles.nav_links} href="#" onClick={() => setShow(!show)}>
                                         Iniciar Sesión
                                     </Nav.Link>

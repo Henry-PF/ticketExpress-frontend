@@ -35,8 +35,6 @@ const PassengerDetails = () => {
                     </FormGroup>
                 </InputGroup>
             </Card>
-            <img src={img} />
-
             <ButtonGroup className={styles.buttonGroup}>
                 <Button className={styles.buttonCompra}>Comprar</Button>
             </ButtonGroup>
