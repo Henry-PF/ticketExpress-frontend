@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
+import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.png'
 //----------Boostrap----------
@@ -22,14 +24,15 @@ import BtnUserLoggedIn from './BtnUserLoggedIn/BtnUserLoggedIn'
 const NavbarLanding = () => {
 
     const dispatch = useDispatch();
-    const userGoogle = useSelector(state => state.userGoogle);
 
+    const [user, setUser] = useState(null)
     const [token, setToken] = useState('')
     const [show, setShow] = useState(false);
     const [userData, setUserData] = useState({
         email: "",
         password: "",
     });
+    const [error, setError] = useState('')
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -40,6 +43,14 @@ const NavbarLanding = () => {
                 correo: email,
                 password: password,
             });
+
+            if (data.error) {
+                Swal.fire({
+                    title: data.error,
+                    icon: 'error'
+                })
+            }
+
             if (await data.token) {
                 setToken(data)
                 localStorage.setItem('token', data.token);
@@ -47,13 +58,21 @@ const NavbarLanding = () => {
                 localStorage.setItem('apellido', data.data.apellido);
                 localStorage.setItem('correo', data.data.correo);
                 window.location.reload();
-            } else {
-
             }
+
         } catch (error) {
             console.log(error);
         };
     }
+
+    useEffect(() => {
+        // Leer la cookie con la información del usuario
+        const userData = Cookies.get('userData');
+        if (userData) {
+            const parsedUser = JSON.parse(userData);
+            setUser(parsedUser);
+        }
+    }, []);
 
     return (
         <>
@@ -70,8 +89,8 @@ const NavbarLanding = () => {
                             <Nav.Link className={styles.nav_links} href="/create_route">Crear Ruta</Nav.Link>
                             <Nav.Link className={styles.nav_links} href="#">Sobre Nosotros</Nav.Link>
                             {
-                                localStorage.getItem('token')
-                                    ? <BtnUserLoggedIn name={localStorage.getItem('nombre')} />
+                                localStorage.getItem('token') || user
+                                    ? localStorage.getItem('nombre') ? <BtnUserLoggedIn name={localStorage.getItem('nombre')} /> : <BtnUserLoggedIn name={user?.name.givenName} />
                                     : <Nav.Link className={styles.nav_links} href="#" onClick={() => setShow(!show)}>
                                         Iniciar Sesión
                                     </Nav.Link>
@@ -93,7 +112,7 @@ const NavbarLanding = () => {
                                     placeholder="Email"
                                     onChange={(event) => setUserData({ ...userData, email: event.target.value })}
                                 />
-
+                                {error ? <p className={styles.error}>{error}</p> : ''}
                             </FloatingLabel>
                             <FloatingLabel controlId="floatingInput" label="Contraseña" className="mb-4">
                                 <Form.Control
@@ -106,6 +125,7 @@ const NavbarLanding = () => {
                             <Button type='submit' className={styles.btn_submit}>
                                 INICIAR SESIÓN
                             </Button>
+
                         </Form>
                         <Link to='http://localhost:3001/auth/google' className={styles.btn_google} type="button">
                             <FcGoogle className={styles.google_logo} />
