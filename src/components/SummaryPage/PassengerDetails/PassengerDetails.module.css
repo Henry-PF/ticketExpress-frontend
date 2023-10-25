@@ -1,0 +1,44 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.InputGroup {
+    display: grid;
+    grid: repeat(3, 80px) / auto-flow 20rem;
+}
+
+.card {
+    display: flex;
+    max-width: 44rem;
+    min-height: 24rem;
+}
+
+.formGroup {
+    min-width: 14rem;
+    padding: 2rem;
+}
+
+.titleCard {
+    padding: 1rem;
+    margin-left: 1rem;
+}
+
+.buttonCompra {
+    max-width: 10rem;
+    max-height: 5rem;
+    padding: 1rem;
+}
+
+.buttonGroup {
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+}
+
+img {
+    margin-top: 10px;
+    width: 100%;
+}

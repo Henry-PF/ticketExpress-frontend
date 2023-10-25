@@ -1,0 +1,76 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.InputGroup {
+    width: 61%;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34rem;
+    min-height: 24rem;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+
+}
+
+.formGroup p {
+    margin: 0;
+    padding: 5px;
+}
+
+.titleCard {
+    padding: 1rem;
+    margin-left: 1rem;
+}
+
+.buttons {
+    margin: 1rem;
+    background-color: transparent;
+    color: black;
+    border: 0rem;
+}
+
+.trip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.trip span {
+    color: var(--primary);
+    font-size: 1.5em;
+}
+
+.divHorarios {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.subDivHorarios {
+    padding: 1em;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.subDivHorarios h5 {
+    font-size: 2em;
+}
+
+.dataTime {
+    border: 1px solid black;
+}
+
+hr {
+    margin: 5px;
+}

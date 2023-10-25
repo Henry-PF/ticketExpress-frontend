@@ -1,0 +1,28 @@
+.home {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.card {
+    width: 100%;
+    /*justify-content: center;
+    align-items: center;*/
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: rgb(85, 84, 84);
+    box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.651);
+}

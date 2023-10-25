@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 100px 0;
+}
+
+.ul {
+    display: flex;
+    width: 85%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.li {
+    font-size: 1.3em;
+    width: 200px;
+    list-style: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all .3s ease;
+}
+
+.icon {
+    font-size: 5em;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.active {
+    color: rgb(235, 99, 18);
+}
+
+.active svg {
+    transition: all .5s ease;
+    color: var(--primary);
+}
+
+.txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.txt p {
+    font-weight: bold;
+    width: 70%;
+    height: 50px;
+    text-align: center;
+    font-size: 1.2em;
+}
