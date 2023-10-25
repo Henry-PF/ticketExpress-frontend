@@ -11,7 +11,6 @@ const BtnUserLoggedIn = (props) => {
         localStorage.clear();
         window.location.reload();
         Cookies.remove('userData');
-        axios.post('http://localhost:3001/auth/logout')
     }
     console.log(props.name);
     return (
