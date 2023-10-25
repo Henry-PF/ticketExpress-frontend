@@ -1,20 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import validations from "./validations"
 // React Bootstrap
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
 import Navbar from '../LandingPage/Navbar/NavbarLanding'
 // Styles
 import styles from './register.module.css'
 import { userRegister } from '../../Redux/actions';
+import { useNavigate } from 'react-router';
 
 const Register = () => {
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
     const onSubmit = (values, actions) => {
         const formData = new FormData();
 
@@ -28,23 +29,25 @@ const Register = () => {
             telefono: values.telefono,
             direccion: values.direccion
         }
-
+        console.log(dataCliente);
         formData.append('data', JSON.stringify(dataCliente));
         formData.append('nick', values.nombre);
         formData.append('password', values.password);
 
         dispatch(userRegister(formData));
+        navigate("/");
 
         // swal("Registrado!");
         console.log("Submitted!", values);
         actions.resetForm()
     }
+
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
 
         // Valores iniciales que vamos a tener en nuestro formulario
         initialValues: { nombre: "", apellido: "", dni: "", correo: "", password: "", telefono: "", direccion: "" },
         // Esquema de validaciones, que declaramos e importamos
-
+        validationSchema: validations,
         // Funcion onSubmit que tomara el lugar en cualquier handleSubmit
         onSubmit
     })
@@ -56,6 +59,7 @@ const Register = () => {
             <Form className={styles.container} onSubmit={handleSubmit}>
                 <div className={styles.input_container}>
                     <div className={styles.input_name}>
+
                         <FloatingLabel controlId="floatingInput" label="Nombre" className="w-100 me-2">
                             <Form.Control
                                 className={styles.form_input}
@@ -64,9 +68,12 @@ const Register = () => {
                                 name='nombre'
                                 value={values.nombre}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            <div className={styles.errorContainer}>{errors.nombre && touched.nombre && <p className='errorText'>{errors.nombre}</p>}</div>
                         </FloatingLabel>
+
                         <FloatingLabel controlId="floatingInput" label="Apellido" className="w-100 ">
                             <Form.Control
                                 className={styles.form_input}
@@ -75,8 +82,10 @@ const Register = () => {
                                 name='apellido'
                                 value={values.apellido}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            <div className={styles.errorContainer}>{errors.apellido && touched.apellido && <p className='errorText'>{errors.apellido}</p>}</div>
                         </FloatingLabel>
                     </div>
                     <div className={styles.input_name}>
@@ -88,8 +97,10 @@ const Register = () => {
                                 name="dni"
                                 value={values.dni}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            <div className={styles.errorContainer}>{errors.dni && touched.dni && <p className='errorText'>{errors.dni}</p>}</div>
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Teléfono (Opcional)" className="w-100">
                             <Form.Control
@@ -111,21 +122,26 @@ const Register = () => {
                                 name="direccion"
                                 value={values.direccion}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            <div className={styles.errorContainer}>{errors.direccion && touched.direccion && <p className='errorText'>{errors.direccion}</p>}</div>
                         </FloatingLabel>
                     </div>
                     <div className={styles.input_name}>
                         <FloatingLabel controlId="floatingInput" label="Email" className="w-100">
                             <Form.Control
                                 className={styles.form_input}
+
                                 type="email"
                                 placeholder="name@example.com"
                                 name="correo"
                                 value={values.correo}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 required
                             />
+                            <div className={styles.errorContainer}>{errors.correo && touched.correo && <p className='errorText'>{errors.correo}</p>}</div>
                         </FloatingLabel>
 
                     </div>
@@ -134,10 +150,11 @@ const Register = () => {
                             <Form.Control
                                 className={styles.form_input}
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Contraseña"
                                 name="password"
                                 value={values.password}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 required
                             />
                         </FloatingLabel>
@@ -146,7 +163,7 @@ const Register = () => {
                         Crear Cuenta
                     </Button>
                 </div>
-            </Form>
+            </Form >
         </>
     )
 }

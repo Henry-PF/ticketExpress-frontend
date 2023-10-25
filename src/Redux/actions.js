@@ -1,12 +1,5 @@
 import axios from 'axios';
-import { GET_CITIES, GET_PROVINCE, SEARCH_RESULTS, USER_LOGIN } from './action-types'
-
-export const searchResults = (data) => {
-    return {
-        type: SEARCH_RESULTS,
-        payload: data
-    }
-}
+import { GET_TERMINAL, GET_RUTAS, SEARCH_RESULTS, USER_LOGIN } from './action-types'
 
 export const userLogin = () => {
     return async (dispatch) => {
@@ -32,12 +25,22 @@ export const userRegister = (formData) => async () => {
     }
 };
 
+export const createRoute = (formData) => async () => {
+    console.log('REDUX', formData);
+    try {
+        const response = await axios.post('http://localhost:3001/rutas', formData);
+        console.log('Registro exitoso:', response.data);
+    } catch (error) {
+        console.error('Error en el registro:', error);
+    }
+};
+
 export const getCities = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get('http://localhost:3001/ciudades/get_cities');
+            const { data } = await axios.get('http://localhost:3001/terminal/get');
             dispatch({
-                type: GET_CITIES,
+                type: GET_TERMINAL,
                 payload: data,
             })
         } catch (error) {
@@ -46,12 +49,27 @@ export const getCities = () => {
     }
 }
 
-export const getProvince = () => {
+// export const getProvince = () => {
+//     return async (dispatch) => {
+//         try {
+//             const { data } = await axios.get('http://localhost:3001/provincias/get_province');
+//             dispatch({
+//                 type: GET_PROVINCE,
+//                 payload: data,
+//             })
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+// }
+
+export const searchResults = ({ origen, destino, fecha_salida }) => {
     return async (dispatch) => {
+        console.log('Redux', origen, destino, fecha_salida);
         try {
-            const { data } = await axios.get('http://localhost:3001/provincias/get_province');
+            const { data } = await axios.get(`http://localhost:3001/rutas/filter?origen=${origen}&destino=${destino}&fecha_salida=${fecha_salida}`);
             dispatch({
-                type: GET_PROVINCE,
+                type: SEARCH_RESULTS,
                 payload: data,
             })
         } catch (error) {
