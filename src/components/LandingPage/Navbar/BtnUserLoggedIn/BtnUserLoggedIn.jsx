@@ -12,7 +12,7 @@ const BtnUserLoggedIn = (props) => {
         window.location.reload();
         Cookies.remove('userData');
     }
-    console.log(props.name);
+
     return (
         <>
             <Dropdown>

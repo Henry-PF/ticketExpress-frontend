@@ -16,10 +16,8 @@ import { FloatingLabel } from 'react-bootstrap';
 //----------React-icons----------
 import { FcGoogle } from 'react-icons/fc';
 //----------Styles----------
-import styles from './navbar.module.css'
-import SearchBar from '../SearchBar/SearchBar'
-import { userLogin } from '../../../Redux/actions'
 import BtnUserLoggedIn from './BtnUserLoggedIn/BtnUserLoggedIn'
+import styles from './styles.module.css'
 
 const NavbarLanding = () => {
 

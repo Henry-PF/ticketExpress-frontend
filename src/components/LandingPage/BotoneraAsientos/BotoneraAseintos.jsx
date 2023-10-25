@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import styles from './styles.module.css'
 import { MdOutlineEventSeat } from 'react-icons/md'
+import styles from './styles.module.css'
 
 const BotoneraAseintos = () => {
     const [seats, setSeats] = useState(44);
     const [selectedSeats, setSelectedSeats] = useState([]);
-
+    console.log(selectedSeats);
     const handleSeatClick = (seat) => {
         if (selectedSeats.includes(seat)) {
             setSelectedSeats(selectedSeats.filter(selectedSeat => selectedSeat !== seat));
