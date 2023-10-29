@@ -1,4 +1,4 @@
-import { GET_TERMINAL, GET_RUTAS, SEARCH_RESULTS, USER_LOGIN, USER_REGISTER } from './action-types'
+import { GET_TERMINAL, GET_ROUTES, SEARCH_RESULTS, USER_LOGIN, USER_REGISTER } from './action-types'
 
 const initialState = {
     rutas: [],
@@ -24,7 +24,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 cities: action.payload,
             }
-        case GET_RUTAS:
+        case GET_ROUTES:
             return {
                 ...state,
                 rutas: action.payload,

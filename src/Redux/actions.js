@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TERMINAL, GET_RUTAS, SEARCH_RESULTS, USER_LOGIN } from './action-types'
+import { GET_TERMINAL, GET_ROUTES, SEARCH_RESULTS, USER_LOGIN } from './action-types'
 
 export const userLogin = () => {
     return async (dispatch) => {
@@ -49,19 +49,19 @@ export const getCities = () => {
     }
 }
 
-// export const getProvince = () => {
-//     return async (dispatch) => {
-//         try {
-//             const { data } = await axios.get('http://localhost:3001/provincias/get_province');
-//             dispatch({
-//                 type: GET_PROVINCE,
-//                 payload: data,
-//             })
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     }
-// }
+export const getRoutes = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get('http://localhost:3001/rutas/getAll');
+            dispatch({
+                type: GET_ROUTES,
+                payload: data,
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
 
 export const searchResults = ({ origen, destino, fecha_salida }) => {
     return async (dispatch) => {

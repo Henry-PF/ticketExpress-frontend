@@ -5,6 +5,7 @@ import Summary from './components/SummaryPage/Summary/Summary';
 import Register from './components/Register/Register';
 import CreateRoute from './components/CreateRoute/CreateRoute';
 import './App.css';
+import UserPanel from './components/UserPanel/UserPanel';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path='/register' element={<Register />} />
         <Route exact path="/ticket_detail/:id" element={<Summary />} />
         <Route exact path='/create_route' element={<CreateRoute />} />
+        <Route exact path='/user' element={<UserPanel />} />
       </Routes>
     </div>
   );

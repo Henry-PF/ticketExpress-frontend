@@ -6,21 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import NavbarLanding from "../../LandingPage/Navbar/NavbarLanding";
 import SearchBar from "../../LandingPage/SearchBar/SearchBar";
 import { useLocation, useParams } from "react-router";
+import { getCities } from "../../../Redux/actions";
 
 
 export default function Trips() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const results = useSelector(state => state.results);
-    const { search } = useLocation();
-    const query = new URLSearchParams(search);
-    const origen = query.get('origen');
-    const destino = query.get('destino');
-    const fecha_salida = query.get('fecha_salida');
+    // const { search } = useLocation();
+    // const query = new URLSearchParams(search);
+    // const origen = query.get('origen');
+    // const destino = query.get('destino');
+    // const fecha_salida = query.get('fecha_salida');
+    useEffect(() => {
+        dispatch(getCities);
+    }, [dispatch])
 
     return (
         <div>
             <NavbarLanding />
-            <SearchBar origen={origen} destino={destino} fecha_salida={new Date(fecha_salida)} />
+            <SearchBar />
 
             <div className={styles.home}>
                 <div>

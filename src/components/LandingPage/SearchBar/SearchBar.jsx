@@ -28,7 +28,6 @@ const SearchBar = (props) => {
         data = [...cities];
     }
 
-    console.log('Fecha', props.fecha_salida);
     const [startDate, setStartDate] = useState(null);
     const [returnDate, setReturnDate] = useState(null);
     const [searchQuery, setSearchQuery] = useState({
