@@ -6,15 +6,17 @@ import Cookies from 'js-cookie'
 import axios from 'axios'
 import { getUserByEmail } from '../../Redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 
 const UserPanel = () => {
 
-    const googleEmail = JSON.parse(Cookies.get('userData'))
+    const googleEmail = Cookies.get('userData')
 
     useEffect(() => {
-        axios.post('http://localhost:3001/usuarios/getUserCorreo', { email: localStorage.getItem('correo') || googleEmail.emails[0].value })
+        axios.post('http://localhost:3001/usuarios/getUserCorreo', { email: localStorage.getItem('correo') || JSON.parse(googleEmail).emails[0]?.value })
             .then(response => setUser({
                 ...user,
+                id: response.data.data.id,
                 nombre: response.data.data.nombre,
                 apellido: response.data.data.apellido,
                 correo: response.data.data.correo,
@@ -25,6 +27,7 @@ const UserPanel = () => {
     }, []);
 
     const [user, setUser] = useState({
+        id: '',
         nombre: '',
         apellido: '',
         correo: '',
@@ -33,12 +36,32 @@ const UserPanel = () => {
         telefono: ''
     });
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const data = await axios.put('http://localhost:3001/usuarios/update_user', user);
+            if (data.status === 200) {
+                Swal.fire({
+                    title: data.data.message,
+                    icon: 'success'
+                })
+                // setShow(false);
+            } else {
+                Swal.fire({
+                    title: data.data.message,
+                    icon: 'error'
+                })
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const handleChange = () => {
-
+    const handleChange = (event) => {
+        setUser({
+            ...user,
+            [event.target.name]: event.target.value
+        })
     }
 
     return (
@@ -55,7 +78,7 @@ const UserPanel = () => {
                                     placeholder="Nombre"
                                     name='nombre'
                                     value={user.nombre}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                     required
                                 />
                             </FloatingLabel>
@@ -67,7 +90,7 @@ const UserPanel = () => {
                                     placeholder="Apellido"
                                     name='apellido'
                                     value={user.apellido}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                     required
                                 />
                             </FloatingLabel>
@@ -80,7 +103,7 @@ const UserPanel = () => {
                                     placeholder="Número de Documento"
                                     name="dni"
                                     value={user.dni}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                     required
                                 />
                             </FloatingLabel>
@@ -91,7 +114,7 @@ const UserPanel = () => {
                                     placeholder="Teléfono (Opcional)"
                                     name="telefono"
                                     value={user.telefono}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                 />
                             </FloatingLabel>
                         </div>
@@ -103,7 +126,7 @@ const UserPanel = () => {
                                     placeholder="Dirección"
                                     name="direccion"
                                     value={user.direccion}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                     required
                                 />
                             </FloatingLabel>
@@ -117,7 +140,7 @@ const UserPanel = () => {
                                     placeholder="name@example.com"
                                     name="correo"
                                     value={user.correo}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                     required
                                 />
                             </FloatingLabel>
@@ -131,7 +154,7 @@ const UserPanel = () => {
                                     placeholder="Contraseña"
                                     name="password"
                                     value={user.password}
-                                    onChange={handleChange}
+                                    onChange={event => handleChange(event)}
                                     required
                                 />
                             </FloatingLabel>

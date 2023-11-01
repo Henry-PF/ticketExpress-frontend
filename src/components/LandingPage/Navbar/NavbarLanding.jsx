@@ -6,13 +6,12 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.png'
 //----------Boostrap----------
-
+import { Button, Container, FloatingLabel, Form, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 //----------React-icons----------
 import { FcGoogle } from 'react-icons/fc';
 //----------Styles----------
 import BtnUserLoggedIn from './BtnUserLoggedIn/BtnUserLoggedIn'
 import styles from './styles.module.css'
-import { Button, Container, FloatingLabel, Form, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 
 const NavbarLanding = () => {
 

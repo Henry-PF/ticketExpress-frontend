@@ -12,12 +12,24 @@ const BotoneraAseintos = () => {
     const [occupiedSeats, setOccupiedSeats] = useState([]);
     const [activeTab, setActiveTab] = useState(0);
     const [seatData, setSeatData] = useState({});
+    console.log(1, seatData);
     const [passagerData, setPassagerData] = useState([])
-
+    console.log(2, passagerData);
     const seatList = Array.from(Array(seats).keys());
     const half = Math.ceil(seatList.length / 2);
-    const firstHalf = seatList.slice(0, half);
-    const secondHalf = seatList.slice(half);
+
+    const numColumns = 2;
+    const numRows = half;
+
+    const seatMatrix = [];
+
+    for (let column = 0; column < numColumns; column++) {
+        const columnSeats = [];
+        for (let row = 0; row < numRows; row++) {
+            columnSeats.push(`${String.fromCharCode(65 + column)}${row}`);
+        }
+        seatMatrix.push(columnSeats);
+    }
 
     const asientosOcupados = async () => {
         try {
@@ -54,15 +66,6 @@ const BotoneraAseintos = () => {
         return occupiedSeats.includes(seat);
     };
 
-    const asientoReservado = async (asiento, datosPasajero) => {
-
-        await axios.post('http://localhost:3001/asientos', {
-            asiento,
-        });
-
-        await axios.post('http://localhost:3001/pasajeros', datosPasajero);
-    };
-
     const handleSeatReservation = async () => {
         try {
             const seatsToReserve = selectedSeats.filter(seat => !isSeatOccupied(seat));
@@ -87,14 +90,14 @@ const BotoneraAseintos = () => {
 
             const reservationData = {
                 datosPasajeros: passengerDetails,
-                ruta: '', // Agrega la ruta correspondiente aquí
-                amount: '', // Agrega el monto correspondiente aquí
+                id_ruta: '',
+                id_user: parseInt(localStorage.getItem('id')),
+                monto: 500,
+                viajeIdayVuelta: false
             };
 
-            // Actualiza el estado passagerData con los datos de los pasajeros
             setPassagerData(reservationData);
-            console.log(passagerData);
-            // Realiza la llamada al servidor para crear la orden de pago
+            console.log('PASAJERO', passagerData);
             const response = await axios.post("http://localhost:3001/payment/create-order", passagerData);
             console.log(response);
             const data = await response.data;
@@ -141,7 +144,7 @@ const BotoneraAseintos = () => {
             <div className={styles.container}>
                 <div className={styles.seatsContainer}>
                     <div className={styles.rows}>
-                        {firstHalf.map(seatIndex => (
+                        {seatMatrix[0].map(seatIndex => (
                             <div
                                 key={seatIndex}
                                 className={`${styles.columns} ${isSeatSelected(seatIndex) ? styles.selectedSeat : ''} ${isSeatOccupied(seatIndex) ? styles.occupiedSeat : ''}`}
@@ -153,7 +156,7 @@ const BotoneraAseintos = () => {
                         ))}
                     </div>
                     <div className={styles.rows}>
-                        {secondHalf.map(seatIndex => (
+                        {seatMatrix[1].map(seatIndex => (
                             <button
                                 key={seatIndex}
                                 className={`${styles.columns} ${isSeatSelected(seatIndex) ? styles.selectedSeat : ''} ${isSeatOccupied(seatIndex) ? styles.occupiedSeat : ''}`}
