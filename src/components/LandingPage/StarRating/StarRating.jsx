@@ -3,7 +3,7 @@ import './star_rating.css'
 
 const StarRating = ({ score }) => {
 
-    const maxStars = 128;
+    const maxStars = 5.6;
     const starPercentage = (score / maxStars) * 100;
     const starPercentageRounded = Math.round(starPercentage);
 
