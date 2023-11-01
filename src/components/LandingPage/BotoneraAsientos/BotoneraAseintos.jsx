@@ -91,7 +91,7 @@ const BotoneraAseintos = () => {
                 amount: '', // Agrega el monto correspondiente aquí
             };
 
-            // Actualiza el estado passengerData con los datos de los pasajeros
+            // Actualiza el estado passagerData con los datos de los pasajeros
             setPassagerData(reservationData);
             console.log(passagerData);
             // Realiza la llamada al servidor para crear la orden de pago
@@ -117,11 +117,11 @@ const BotoneraAseintos = () => {
         updatedSeatData[seat][fieldName] = value;
         setSeatData(updatedSeatData);
 
-        const passengerIndex = passengerData.findIndex(p => p.asiento === seat.toString());
+        const passengerIndex = passagerData.findIndex(p => p.asiento === seat.toString());
         if (passengerIndex !== -1) {
-            const updatedPassengerData = [...passengerData];
-            updatedPassengerData[passengerIndex][fieldName] = value;
-            setPassengerData(updatedPassengerData);
+            const updatedpassagerData = [...passagerData];
+            updatedpassagerData[passengerIndex][fieldName] = value;
+            setPassagerData(updatedpassagerData);
         }
     };
 
