@@ -1,4 +1,4 @@
-import { GET_TERMINAL, GET_RUTAS, SEARCH_RESULTS, USER_LOGIN, USER_REGISTER } from './action-types'
+import { GET_TERMINAL, GET_ROUTES, SEARCH_RESULTS, USER_LOGIN, USER_REGISTER, DATA_USER } from './action-types'
 
 const initialState = {
     rutas: [],
@@ -6,6 +6,7 @@ const initialState = {
     cities: [],
     province: [],
     userGoogle: {},
+    user: {},
 };
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -24,10 +25,15 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 cities: action.payload,
             }
-        case GET_RUTAS:
+        case GET_ROUTES:
             return {
                 ...state,
                 rutas: action.payload,
+            }
+        case DATA_USER:
+            return {
+                ...state,
+                user: action.payload
             }
         default:
             return state;

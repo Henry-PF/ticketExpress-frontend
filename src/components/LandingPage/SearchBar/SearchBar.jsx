@@ -28,7 +28,6 @@ const SearchBar = (props) => {
         data = [...cities];
     }
 
-    console.log('Fecha', props.fecha_salida);
     const [startDate, setStartDate] = useState(null);
     const [returnDate, setReturnDate] = useState(null);
     const [searchQuery, setSearchQuery] = useState({
@@ -146,7 +145,7 @@ const SearchBar = (props) => {
                         isClearable
                     />
                 </Form.Group>
-                <Form.Group className={styles.formGroup} controlId="formBasicPassword">
+                {/* <Form.Group className={styles.formGroup} controlId="formBasicPassword">
                     <Form.Label className='text-white'>Pasajero/s</Form.Label>
                     <div className={styles.formGroupCount}>
                         <button className={styles.btn_count} type="button" onClick={decrement}><BsDash className={styles.btn_icon} /></button>
@@ -158,7 +157,7 @@ const SearchBar = (props) => {
                             min={1} />
                         <button className={styles.btn_count} type="button" onClick={increment}><BsPlus className={styles.btn_icon} /></button>
                     </div>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Label></Form.Label>
                 <Form.Group className='' controlId="formBasicPassword">
                     <Form.Label><Form.Label></Form.Label></Form.Label>

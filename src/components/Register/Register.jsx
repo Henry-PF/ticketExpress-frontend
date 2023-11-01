@@ -15,30 +15,27 @@ import { useNavigate } from 'react-router';
 const Register = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     const onSubmit = (values, actions) => {
-        const formData = new FormData();
 
         const dataCliente = {
             nick: values.nombre,
             password: values.password,
-            nombre: values.nombre,
-            apellido: values.apellido,
-            correo: values.correo,
-            dni: values.dni,
-            telefono: values.telefono,
-            direccion: values.direccion
+            data: {
+                nombre: values.nombre,
+                apellido: values.apellido,
+                correo: values.correo,
+                dni: values.dni,
+                direccion: values.direccion,
+                telefono: values.telefono,
+            }
         }
-        console.log(dataCliente);
-        formData.append('data', JSON.stringify(dataCliente));
-        formData.append('nick', values.nombre);
-        formData.append('password', values.password);
 
-        dispatch(userRegister(formData));
+        dispatch(userRegister(dataCliente));
         navigate("/");
 
         // swal("Registrado!");
-        console.log("Submitted!", values);
         actions.resetForm()
     }
 

@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/es";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCities, getRoutes } from "../../../Redux/actions";
 
-export default function Card(props) { //recibira datos como id, empresa, origen, destino, categoria, butacas libres, precio (ver bien DB)
+export default function Card(props) {
+    const dispatch = useDispatch();
+    const terminals = useSelector(state => state.cities);
+
+    useEffect(() => {
+        dispatch(getCities());
+    }, [dispatch])
+
+
     const hora_salida = new Date(`2000-01-01T${props.hora_salida}`);
     const hora_llegada = new Date(`2000-01-01T${props.hora_llegada}`);
 
@@ -53,7 +63,7 @@ export default function Card(props) { //recibira datos como id, empresa, origen,
                 </div>
 
                 <div className={styles.data_ticket}>
-                    <h4 className={styles.txt}>{props.origin}</h4>
+                    <h4 className={styles.txt}>{terminals?.map(terminal => props.origin === terminal.id ? terminal.nombre : '')}</h4>
                     <h5 className={styles.data}>Sale el {fecha_salidaFormatted}</h5> {/*FECHA DE SALIDA*/}
                     <h1 className={styles.hour}>{hora_salidaFormatted}<span className={styles.hs}>HS</span></h1> {/*HORARIO DE SALIDA*/}
                     <h5 className={styles.txt}>Horario de Salida</h5>
@@ -66,7 +76,7 @@ export default function Card(props) { //recibira datos como id, empresa, origen,
                 </div>
 
                 <div className={styles.data_ticket}>
-                    <h4 className={styles.txt}>{props.destination}</h4>
+                    <h4 className={styles.txt}>{terminals?.map(terminal => props.destination === terminal.id ? terminal.nombre : '')}</h4>
                     <h5 className={styles.data}>Llega el {arrivalDateFormatted}</h5> {/*FECHA DE LLEGADA*/}
                     <h1 className={styles.hour}>{props.hora_llegada}<span className={styles.hs}>HS</span></h1> {/*HORARIO DE LLEGADA*/}
                     <h5 className={styles.txt}>Horario de Llegada</h5>
