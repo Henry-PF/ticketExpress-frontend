@@ -1,3 +1,9 @@
+/* .container {
+  background-image: url("../../../public/rekt.png");
+  background-size:auto;
+  padding: 6%;
+} */
+
 .cards-container {
   display: flex;
   width: 100%;
@@ -6,7 +12,7 @@
   border-radius: 1rem;
   margin-bottom: 3rem;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .text-center {
@@ -17,7 +23,8 @@
 .cards-container .card-container {
   position: relative;
   width: 25%;
-  transition: all 0.5s ease;
+  height: 100%;
+  transition: all 0.7s ease;
   overflow: hidden;
 }
 
@@ -46,7 +53,7 @@
   font-size: 1.5em;
   text-transform: uppercase;
   color: black;
-  
+
   letter-spacing: 0.1em;
   transform: rotate(-90deg);
   transition: all 0.5s ease-out;
@@ -57,7 +64,7 @@
   text-align: center;
   font-size: 2em;
   color: rgb(0, 0, 0);
-  margin-bottom: 1rem;
+  margin-bottom: 3px;
 }
 
 .card-social {

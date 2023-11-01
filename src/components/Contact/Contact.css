@@ -1,5 +1,6 @@
+
 .contactSection{
- /*  background-image:  url("../../../public/rekt.png"); */  
+  background-image:  url("../../../public/rekt.png"); 
   background-size: cover;
   padding: 6%;
 }
@@ -13,7 +14,7 @@
 
 .contact-detail-options {
   font-size: 1.2rem;
-  font-weight: bold;
+  
   
 }
 

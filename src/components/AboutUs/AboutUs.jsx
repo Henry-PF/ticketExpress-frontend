@@ -29,7 +29,8 @@ const AboutUs = () => {
   return (
     <>
       <Navbar />
-      <section className="container flex-column text-white">
+      <div className="container">
+      <section >
         <h1 className="text-center text-[2rem] font-fontGeneral">
           Nuestro Equipo:
         </h1>
@@ -45,13 +46,13 @@ const AboutUs = () => {
                 alt=""
               />
               <div className="card-info">
-                <p className="card-name">Alexander</p>
+                <p className="card-name">Alexander Torres</p>
                 <div className="card-social">
                   <div className="fs-5"></div>
                   <div className="card-link">
                     <a
                       className="me-3"
-                      href="https://www.linkedin.com/in/dario-p%C3%A9rez-5a5b89219/"
+                      href="https://www.linkedin.com/in/dev-alexander-torres/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -59,7 +60,7 @@ const AboutUs = () => {
                     </a>
                     <a
                       className="me-3"
-                      href="https://github.com/LocoGOD"
+                      href="https://github.com/websterAJ"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -76,12 +77,12 @@ const AboutUs = () => {
                 alt=""
               />
               <div className="card-info">
-                <p className="card-name">Maxy Marquez</p>
+                <p className="card-name">Maximiliano Marquez</p>
                 <div className="card-social">
                   <div className="card-link">
                     <a
                       className="me-3"
-                      href="https://www.linkedin.com/in/jeermuce/"
+                      href="https://www.linkedin.com/in/maximiliano-marquez-519274183/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -89,7 +90,7 @@ const AboutUs = () => {
                     </a>
                     <a
                       className="me-3"
-                      href="https://github.com/jeermuce"
+                      href="https://github.com/MaxyMarquez"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -110,7 +111,7 @@ const AboutUs = () => {
                   <div className="card-link">
                     <a
                       className="me-3"
-                      href="https://www.linkedin.com/in/facundo-gaston-vies-b0863a268/"
+                      href="https://www.linkedin.com/in/matias-tari-299a10211/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -118,7 +119,7 @@ const AboutUs = () => {
                     </a>
                     <a
                       className="me-3"
-                      href="https://github.com/fgvies"
+                      href="https://github.com/MatiTarl"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -140,7 +141,7 @@ const AboutUs = () => {
                   <div className="card-link">
                     <a
                       className="me-3"
-                      href="https://www.linkedin.com/in/jeison-duvan-ramirez"
+                      href="https://www.linkedin.com/in/agustin-almonacid-1431851bb/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -148,7 +149,7 @@ const AboutUs = () => {
                     </a>
                     <a
                       className="me-3"
-                      href="https://github.com/Duvio01"
+                      href="https://github.com/Turco777"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -165,12 +166,12 @@ const AboutUs = () => {
                 alt=""
               />
               <div className="card-info">
-                <p className="card-name">Meli Lopez</p>
+                <p className="card-name">Melissa Lopez</p>
                 <div className="card-social">
                   <div className="card-link">
                     <a
                       className="me-3"
-                      href="https://www.linkedin.com/in/jeison-duvan-ramirez"
+                      href="https://www.linkedin.com/in/flaviamelissalopez/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -178,7 +179,7 @@ const AboutUs = () => {
                     </a>
                     <a
                       className="me-3"
-                      href="https://github.com/Duvio01"
+                      href="https://github.com/MelLopez22"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -199,7 +200,7 @@ const AboutUs = () => {
                   <div className="card-link">
                     <a
                       className="me-3"
-                      href="https://www.linkedin.com/in/cristian-barth-570227288"
+                      href="https://www.linkedin.com/in/diego-contreras-156b71216/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -207,7 +208,7 @@ const AboutUs = () => {
                     </a>
                     <a
                       className="me-3"
-                      href="https://github.com/CrBarth94"
+                      href="https://github.com/diego1contreras"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -220,6 +221,7 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+      </div>
       <Footer />
     </>
   );

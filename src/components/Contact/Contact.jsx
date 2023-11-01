@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "../LandingPage/Navbar/NavbarLanding";
@@ -101,8 +101,9 @@ function Contact() {
                   class="bi bi-person-check mr-2"
                   style={{ fontSize: "1.9rem" }}
                 ></i>
-                <p className="contact-detail-options">Administrado por: </p>
-                <p className="contact-detail-options">Alexander Torres</p>
+                <p className="contact-detail-options">
+                  <b>Administrado por:</b> Alexander Torrens{" "}
+                </p>
               </div>
 
               <div className="d-flex align-items-center m-1">
@@ -110,9 +111,8 @@ function Contact() {
                   class="bi bi-house-check mr-2"
                   style={{ fontSize: "1.9rem" }}
                 ></i>
-                <p className="contact-detail-options">Dirección: </p>
                 <p className="contact-detail-options">
-                  Avenida Juan Domingo Peron 1023
+                  <b>Dirección: </b> Avenida Libertaria 2023
                 </p>
               </div>
 
@@ -121,8 +121,9 @@ function Contact() {
                   class="bi bi-telephone mr-2"
                   style={{ fontSize: "1.9rem" }}
                 ></i>
-                <p className="contact-detail-options">Teléfono: </p>
-                <p className="contact-detail-options">3116412467</p>
+                <p className="contact-detail-options">
+                  <b>Teléfono:</b> 3116412467
+                </p>
               </div>
 
               <div className="d-flex align-items-center m-1">
@@ -130,9 +131,8 @@ function Contact() {
                   class="bi bi-envelope-at mr-2"
                   style={{ fontSize: "1.9rem" }}
                 ></i>
-                <p className="contact-detail-options">Email: </p>
                 <p className="contact-detail-options">
-                  TicketExpress@gmail.com
+                  <b>Email:</b> TicketExpress@gmail.com
                 </p>
               </div>
             </div>
