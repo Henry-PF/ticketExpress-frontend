@@ -23,13 +23,14 @@ const NavbarLanding = () => {
 
     const dispatch = useDispatch();
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState('')
     const [token, setToken] = useState('')
     const [show, setShow] = useState(false);
     const [userData, setUserData] = useState({
         email: "",
         password: "",
     });
+
     const [error, setError] = useState('')
 
     const handleSubmit = async (event) => {
@@ -41,7 +42,7 @@ const NavbarLanding = () => {
                 correo: email,
                 password: password,
             });
-
+            console.log(data.data);
             if (data.error) {
                 Swal.fire({
                     title: data.error,
@@ -52,6 +53,7 @@ const NavbarLanding = () => {
             if (await data.token) {
                 setToken(data)
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('id', data.data.id);
                 localStorage.setItem('nombre', data.data.nombre);
                 localStorage.setItem('apellido', data.data.apellido);
                 localStorage.setItem('correo', data.data.correo);

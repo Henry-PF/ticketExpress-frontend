@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TERMINAL, GET_ROUTES, SEARCH_RESULTS, USER_LOGIN } from './action-types'
+import { GET_TERMINAL, GET_ROUTES, SEARCH_RESULTS, USER_LOGIN, DATA_USER } from './action-types'
 
 export const userLogin = () => {
     return async (dispatch) => {
@@ -17,16 +17,16 @@ export const userLogin = () => {
 }
 
 export const userRegister = (formData) => async () => {
+    console.log(formData);
     try {
         const response = await axios.post('http://localhost:3001/usuarios', formData);
-        console.log('Registro exitoso:', response.data);
+        console.log(response.data);
     } catch (error) {
         console.error('Error en el registro:', error);
     }
 };
 
 export const createRoute = (formData) => async () => {
-    console.log('REDUX', formData);
     try {
         const response = await axios.post('http://localhost:3001/rutas', formData);
         console.log('Registro exitoso:', response.data);
@@ -65,7 +65,6 @@ export const getRoutes = () => {
 
 export const searchResults = ({ origen, destino, fecha_salida }) => {
     return async (dispatch) => {
-        console.log('Redux', origen, destino, fecha_salida);
         try {
             const { data } = await axios.get(`http://localhost:3001/rutas/filter?origen=${origen}&destino=${destino}&fecha_salida=${fecha_salida}`);
             dispatch({
@@ -77,3 +76,18 @@ export const searchResults = ({ origen, destino, fecha_salida }) => {
         }
     }
 }
+
+export const getUserByEmail = (email) => {
+    console.log(email);
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post('http://localhost:3001/usuarios/getUserCorreo', email);
+            dispatch({
+                type: DATA_USER,
+                payload: data
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+};

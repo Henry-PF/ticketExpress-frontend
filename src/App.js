@@ -4,8 +4,8 @@ import Trips from './components/Detail/Trips/Trips'
 import Summary from './components/SummaryPage/Summary/Summary';
 import Register from './components/Register/Register';
 import CreateRoute from './components/CreateRoute/CreateRoute';
-import './App.css';
 import UserPanel from './components/UserPanel/UserPanel';
+import './App.css';
 
 function App() {
   return (

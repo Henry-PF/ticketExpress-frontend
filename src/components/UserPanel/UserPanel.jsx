@@ -3,8 +3,26 @@ import NavbarLanding from '../LandingPage/Navbar/NavbarLanding'
 import { Button, FloatingLabel, Form } from 'react-bootstrap'
 import styles from './styles.module.css'
 import Cookies from 'js-cookie'
+import axios from 'axios'
+import { getUserByEmail } from '../../Redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
 
 const UserPanel = () => {
+
+    const googleEmail = JSON.parse(Cookies.get('userData'))
+
+    useEffect(() => {
+        axios.post('http://localhost:3001/usuarios/getUserCorreo', { email: localStorage.getItem('correo') || googleEmail.emails[0].value })
+            .then(response => setUser({
+                ...user,
+                nombre: response.data.data.nombre,
+                apellido: response.data.data.apellido,
+                correo: response.data.data.correo,
+                dni: response.data.data.dni,
+                direccion: response.data.data.direccion,
+                telefono: response.data.data.telefono
+            }))
+    }, []);
 
     const [user, setUser] = useState({
         nombre: '',
@@ -12,40 +30,8 @@ const UserPanel = () => {
         correo: '',
         dni: '',
         direccion: '',
-        telefono: '',
-    })
-
-    useEffect(() => {
-        if (localStorage) {
-            setUser({
-                ...user,
-                nombre: localStorage.getItem('nombre'),
-                apellido: localStorage.getItem('apellido'),
-                correo: localStorage.getItem('correo'),
-                direccion: localStorage.getItem('direccion'),
-                telefono: localStorage.getItem('telefono'),
-                dni: localStorage.getItem('dni')
-            })
-        }
-        else {
-            const userData = Cookies.get('userData');
-            if (userData) {
-                const parsedUser = JSON.parse(userData);
-                console.log(parsedUser);
-                setUser(parsedUser);
-            }
-        }
-
-
-
-        const userData = Cookies.get('userData');
-        if (userData) {
-            const parsedUser = JSON.parse(userData);
-            setUser(parsedUser);
-        }
-    }, []);
-
-    console.log(user);
+        telefono: ''
+    });
 
     const handleSubmit = () => {
 
