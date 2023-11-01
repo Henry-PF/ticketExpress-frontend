@@ -20,21 +20,24 @@
   display: flex;
   justify-content: center;
   /* max-width: 800px; */
+  height: 250px;
 }
 
 .card {
   max-width: 400px;
-  /* height: 300px; */
   margin: 0 10px;
   padding: 20px;
-  background-color: #f5f5f500;
+  background-color: rgb(212, 211, 211);
   border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: -5px 0 5px rgba(247, 245, 245, 0.2), 5px 0 5px rgba(131, 130, 130, 0.2);
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
+
+
+
 
 .carousel-indicators {
   display: none;
