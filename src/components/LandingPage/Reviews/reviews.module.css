@@ -1,0 +1,77 @@
+.testimonialsContainer {
+  background-color: rgb(212, 211, 211);
+
+  text-align: center;
+  padding: 50px;
+  margin: 0;
+}
+
+.carousel {
+  width: 100%;
+  /* max-width: 800px;  */
+  /* margin: 0 auto; */
+}
+
+.carousel-indicators {
+  color: black;
+}
+
+.carouselRow {
+  display: flex;
+  justify-content: center;
+  /* max-width: 800px; */
+  height: 350px;
+}
+
+.card {
+  max-width: 400px;
+  margin: 0 10px;
+  padding: 20px;
+  background-color: rgb(212, 211, 211);
+  border: none;
+  box-shadow: -5px 0 5px rgba(247, 245, 245, 0.2), 5px 0 5px rgba(131, 130, 130, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
+
+
+.carousel-indicators {
+  display: none;
+}
+
+/* Otros estilos */
+h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+.image {
+  height: 150px;
+}
+
+.image img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  /* Aplica el borde redondeado a la imagen */
+  margin-bottom: 10px;
+}
+
+span {
+  margin-left: 0 !important;
+}

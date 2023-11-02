@@ -1,8 +1,56 @@
-import React from 'react';
-import { Container, Card, CardTitle, InputGroup, FormLabel, FormControl, FormGroup, Button, ButtonGroup } from "react-bootstrap";
-import styles from "./TicketDetail.module.css"
+import React from "react";
+import { Container, Card, Button, ButtonGroup } from "react-bootstrap";
+import moment from "moment";
+import "moment/locale/es";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import Table from "react-bootstrap/Table";
+import styles from "./TicketDetail.module.css";
 
-const TicketDetail = () => {
+const TicketDetail = (props) => {
+    const { id } = useParams();
+
+    const results = useSelector(state => state.results);
+
+    const ticket = results.data?.find((result) => result.id == id);
+
+    const hora_salida = new Date(`2000-01-01T${props.hora_salida}`);
+    const hora_llegada = new Date(`2000-01-01T${props.hora_llegada}`);
+
+    // Si la hora de llegada es anterior a la hora de salida, ajusta la fecha de llegada al día siguiente
+    if (hora_llegada < hora_salida) {
+        hora_llegada.setDate(hora_llegada.getDate() + 1);
+    }
+
+    // Calcula la diferencia en milisegundos entre la hora de llegada y la hora de salida
+    const timeDifference = hora_llegada - hora_salida;
+
+    // Convierte la diferencia en horas y minutos
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+
+    // Formatea el tiempo de viaje
+    const travelTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+
+    // Configura el idioma de moment
+    moment.locale("es");
+
+    // Convierte la fecha de salida y hora de salida al formato deseado
+    const departureDateFormatted = moment(props.fecha_salida, "DD/MM/YYYY").format("dddd DD/MM");
+    const hora_salidaFormatted = moment(props.hora_salida, "HH:mm").format("HH:mm");
+
+    // Calcula la fecha y hora de llegada sumando el tiempo de viaje
+    const departureDateTime = moment(props.fecha_salida + " " + props.hora_salida, "DD/MM/YYYY HH:mm");
+    const arrivalDateTime = departureDateTime.clone().add(travelTime, "hours");
+
+    // Comprueba si la hora de llegada es anterior a la hora de salida y ajusta la fecha en consecuencia
+    if (arrivalDateTime.isBefore(departureDateTime)) {
+        arrivalDateTime.add(1, "day");
+    }
+
+    // Convierte la fecha de llegada al formato deseado
+    const arrivalDateFormatted = arrivalDateTime.format("dddd DD/MM");
+
     return (
         <Container className={styles.main}>
             <Card className={styles.card}>
@@ -10,49 +58,55 @@ const TicketDetail = () => {
                     <Button className={styles.buttons} >Ida</Button>
                     <Button className={styles.buttons} >Vuelta</Button>
                 </ButtonGroup>
-                <div>
-                    <a className={styles.parrafo}>De: {"Destino"}</a>
-                    <a className={styles.parrafo}>A: {"Destino"}</a>
+                <div className={styles.trip}>
+                    <p className={styles.parrafo}>De <span>{props.origin}</span></p>
+                    <p className={styles.parrafo}>A <span>{props.destination}</span></p>
                 </div>
                 <div className={styles.divHorarios}>
                     <div className={styles.subDivHorarios}>
-                        <a>Llegada</a>
-                        <h5> 00:00 hs</h5>
-                        <a>Dia de Llegada</a>
+                        <p>Horario de Salida</p>
+                        <h5> {props.hora_salida} hs</h5>
+                        <p>{departureDateFormatted}</p>
                     </div>
                     <div className={styles.subDivHorarios}>
-                        <a>Salida</a>
-                        <h5> 00:00 hs</h5>
-                        <a>Dia de salida</a>
+                        <p>Horario de Llegada</p>
+                        <h5> {props.hora_llegada} hs</h5>
+                        <p>{arrivalDateFormatted}</p>
                     </div>
                 </div>
-                <div className={styles.InputGroup}>
-                    <hr />
-                    <div className={styles.formGroup}>
-                        <h6>Empresa</h6>
-                        <h6>Empresa</h6>
-                    </div>
-                    <hr />
-                    <div className={styles.formGroup}>
-                        <a>Empresa</a>
-                        <a>Empresa</a>
-                    </div>
-                    <hr />
-                    <div className={styles.formGroup}>
-                        <a>Empresa</a>
-                        <a>Empresa</a>
-                    </div>
-                    <hr />
-                    <div className={styles.formGroup}>
-                        <a>Empresa</a>
-                        <a>Empresa</a>
-                    </div>
-                    <hr />
-                    <div className={styles.formGroup}>
-                        <a>Empresa</a>
-                        <a>Empresa</a>
-                    </div>
-                </div>
+
+                <Table responsive="md text-center">
+                    <tbody>
+                        <tr>
+                            <td>Empresa</td>
+                            <td>Empresa</td>
+                        </tr>
+                        <tr>
+                            <td>Servicio</td>
+                            <td>SEMI-CAMA</td>
+                        </tr>
+                        <tr>
+                            <td>Tiempo de viaje </td>
+                            <td>{travelTime}hs</td>
+                        </tr>
+                        <tr>
+                            <td>Boleto</td>
+                            <td>E-Ticket</td>
+                        </tr>
+                        <tr>
+                            <td>Pasajero</td>
+                            <td>{props.pasajeros}</td>
+                        </tr>
+                        <tr>
+                            <td>Valor del Boleto</td>
+                            <td>$ {props.precio}</td>
+                        </tr>
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>$ {props.precio * props.pasajeros}</td>
+                        </tr>
+                    </tbody>
+                </Table>
             </Card>
         </Container>
     )

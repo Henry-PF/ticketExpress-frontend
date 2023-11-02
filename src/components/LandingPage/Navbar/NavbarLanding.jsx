@@ -1,19 +1,72 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom'
+import logo from '../../../assets/logo.png'
 //----------Boostrap----------
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import { Button, Container, FloatingLabel, Form, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 //----------React-icons----------
 import { FcGoogle } from 'react-icons/fc';
 //----------Styles----------
-import styles from './navbar.module.css'
-import logo from '../../../assets/logo.png'
+import BtnUserLoggedIn from './BtnUserLoggedIn/BtnUserLoggedIn'
+import styles from './styles.module.css'
 
 const NavbarLanding = () => {
+
+    const dispatch = useDispatch();
+
+    const [user, setUser] = useState('')
+    const [token, setToken] = useState('')
     const [show, setShow] = useState(false);
+    const [userData, setUserData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const [error, setError] = useState('')
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const { email, password } = userData;
+
+        try {
+            const { data } = await axios.post('http://localhost:3001/auth/login', {
+                correo: email,
+                password: password,
+            });
+            console.log(data.data);
+            if (data.error) {
+                Swal.fire({
+                    title: data.error,
+                    icon: 'error'
+                })
+            }
+
+            if (await data.token) {
+                setToken(data)
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('id', data.data.id);
+                localStorage.setItem('nombre', data.data.nombre);
+                localStorage.setItem('apellido', data.data.apellido);
+                localStorage.setItem('correo', data.data.correo);
+                window.location.reload();
+            }
+
+        } catch (error) {
+            console.log(error);
+        };
+    }
+
+    useEffect(() => {
+        // Leer la cookie con la información del usuario
+        const userData = Cookies.get('userData');
+        if (userData) {
+            const parsedUser = JSON.parse(userData);
+            setUser(parsedUser);
+        }
+    }, []);
 
     return (
         <>
@@ -23,15 +76,20 @@ const NavbarLanding = () => {
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll" className="justify-content-end">
                         <Nav
-                            className="my-2 my-lg-0 "
+                            className="flex align-items-center my-2 my-lg-0 "
                             navbarScroll
                         >
-                            <Nav.Link className={styles.nav_links} href="/">HOME</Nav.Link>
-                            <Nav.Link className={styles.nav_links} href="/create_route">CREAR RUTA</Nav.Link>
-                            <Nav.Link className={styles.nav_links} href="#">SOBRE NOSOTROS</Nav.Link>
-                            <Nav.Link className={styles.nav_links} href="#" onClick={() => setShow(!show)}>
-                                INICIAR SESIÓN
-                            </Nav.Link>
+                            <Nav.Link className={styles.nav_links} href="/">Home</Nav.Link>
+                            <Nav.Link className={styles.nav_links} href="/contact">Contact</Nav.Link>
+
+                            <Nav.Link className={styles.nav_links} href="/aboutus">Sobre Nosotros</Nav.Link>
+                            {
+                                localStorage.getItem('token') || user
+                                    ? localStorage.getItem('nombre') ? <BtnUserLoggedIn name={localStorage.getItem('nombre')} /> : <BtnUserLoggedIn name={user?.name.givenName} />
+                                    : <Nav.Link className={styles.nav_links} href="#" onClick={() => setShow(!show)}>
+                                        Iniciar Sesión
+                                    </Nav.Link>
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -41,24 +99,36 @@ const NavbarLanding = () => {
                     </Offcanvas.Header>
                     <div className={styles.divider_line} />
                     <Offcanvas.Body>
-                        <Form>
-                            <Form.Group className='mb-4' controlId="formBasicEmail">
-                                <Form.Control className={styles.form_input} type="email" placeholder="Email" />
-                            </Form.Group>
-                            <Form.Group className='mb-4' controlId="formBasicPassword">
-                                <Form.Control className={styles.form_input} type="password" placeholder="Password" />
-                            </Form.Group>
-                            <Button className={styles.btn_submit} type="submit">
-                                Submit
+                        <Form onSubmit={handleSubmit}>
+                            <FloatingLabel controlId="floatingInput" label="Email" className="mb-4">
+                                <Form.Control
+                                    className={styles.form_input}
+                                    type="email"
+                                    placeholder="Email"
+                                    onChange={(event) => setUserData({ ...userData, email: event.target.value })}
+                                />
+                                {error ? <p className={styles.error}>{error}</p> : ''}
+                            </FloatingLabel>
+                            <FloatingLabel controlId="floatingInput" label="Contraseña" className="mb-4">
+                                <Form.Control
+                                    className={styles.form_input}
+                                    type="password"
+                                    placeholder="Contraseña"
+                                    onChange={(event) => setUserData({ ...userData, password: event.target.value })}
+                                />
+                            </FloatingLabel>
+                            <Button type='submit' className={styles.btn_submit}>
+                                INICIAR SESIÓN
                             </Button>
-                            <Button className={styles.btn_google} type="button">
-                                <FcGoogle className={styles.google_logo} />
-                                Sign in with Google
-                            </Button>
+
                         </Form>
+                        <Link to='http://localhost:3001/auth/google' className={styles.btn_google} type="button">
+                            <FcGoogle className={styles.google_logo} />
+                            Sign in with Google
+                        </Link>
                         <div className='d-flex flex-column'>
-                            <p className=''>¿Eres nuevo en TicketExpress? <a href="/register">Registrarse</a></p>
-                            <p>Ovidaste tu contraseña? <a href="">Recuperar Contraseña</a></p>
+                            <p>¿Eres nuevo en TicketExpress? <a href="/register">Registrarse</a></p>
+                            <p>Ovidaste tu contraseña? <a href="#">Recuperar Contraseña</a></p>
                         </div>
                     </Offcanvas.Body>
                 </Offcanvas>

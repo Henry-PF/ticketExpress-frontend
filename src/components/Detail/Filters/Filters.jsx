@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
-import styles from "./Filters.module.css";
 import ReactSlider from "react-slider";
 import { useState } from "react";
+import styles from "./Filters.module.css";
+import Form from 'react-bootstrap/Form';
+import Accordion from 'react-bootstrap/Accordion';
 
 //POR AHORA SOLO VISUAL
 //AGREGAR LUEGO FUNCIONES DE FILTRADO QUE VENDRAN LUEGO DESDE EL BACK
 //AGREGAR MAS CSS
 
-export default function Filters(){
+export default function Filters() {
     const [valueHour, setValueHour] = useState([]);
     const [valuePrice, setValuePrice] = useState([]);
 
@@ -15,26 +17,62 @@ export default function Filters(){
         <Fragment>
             <div className={styles.div}>
                 <h4 className={styles.h4}>Filtros de Busqueda</h4>
-                <div class="form-check">
-                    <label className={styles.label}>Empresas</label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="all" /> Todas </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="condor" /> Condor Estrella </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="aguila" /> El Aguila </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="flecha" /> Flecha Bus </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="plusmar" /> Plusmar </label> <br /> 
-                </div>  
-
-                <br />
-
-                <div class="form-check">
-                    <label className={styles.label}>Categorias</label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="all" /> Todas </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="cama" /> Cama </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="semicama" /> Semicama </label> <br />
-                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="suite" /> Suite </label> <br />
-                </div> 
-
-                <br />
+                <Accordion className={styles.accordionContainer} defaultActiveKey={['0']} alwaysOpen>
+                    <Accordion.Item className={styles.accordion} eventKey="0">
+                        <Accordion.Header>Empresas</Accordion.Header>
+                        <Accordion.Body>
+                            <Form>
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    id="todas"
+                                    label="Todas"
+                                    defaultChecked
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Empresa 1"
+                                    id="Empresa 1"
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Empresa 2"
+                                    id="custom-switch"
+                                />
+                            </Form>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+                <Accordion className={styles.accordionContainer} defaultActiveKey={['0']} alwaysOpen>
+                    <Accordion.Item className={styles.accordion} eventKey="0">
+                        <Accordion.Header>Categoria</Accordion.Header>
+                        <Accordion.Body>
+                            <Form>
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    id="custom-switch"
+                                    label="Todas"
+                                    defaultChecked
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Semi-cama"
+                                    id="custom-switch"
+                                />
+                                <Form.Check
+                                    className={styles.check}
+                                    type="switch"
+                                    label="Cama"
+                                    id="custom-switch"
+                                />
+                            </Form>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
 
                 <div className="form-check">
                     <label className={styles.label}>Horarios</label>
@@ -83,7 +121,7 @@ export default function Filters(){
                     Start: {valuePrice[0]} <br />
                     End: {valuePrice[1]}
                 </div>
-        </div>
+            </div>
         </Fragment>
     )
 }
