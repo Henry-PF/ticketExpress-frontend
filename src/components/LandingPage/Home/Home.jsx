@@ -5,6 +5,7 @@ import Carrousel from '../Carrousel/Carrousel'
 import Information from '../Information/Information'
 import Footer from '../Footer/Footer'
 import Reasons from '../Reasons/Reasons'
+import Reviews from '../Reviews/Reviews'
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <Carrousel />
             <Reasons />
             <Information />
+            <Reviews/>
             <Footer />
         </>
     )

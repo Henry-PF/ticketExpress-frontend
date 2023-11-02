@@ -9,10 +9,7 @@ const Summary = () => {
     return (
         <main>
             <NavbarLanding />
-            {/* <div className={styles.summary}>
-                <PassengerDetails />
-                <TicketDetail />
-            </div> */}
+
             <BotoneraAseintos />
         </main>
     )

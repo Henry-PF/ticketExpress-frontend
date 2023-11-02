@@ -54,6 +54,12 @@ export default function Card(props) {
     // Convierte la fecha de llegada al formato deseado
     const arrivalDateFormatted = arrivalDateTime.format("dddd DD/MM");
 
+    const url = `/ticket_detail/${encodeURIComponent(props.origin)}/${encodeURIComponent(props.destination)}/${encodeURIComponent(props.fecha_salida)}/${encodeURIComponent(props.hora_salida)}/${encodeURIComponent(props.hora_llegada)}/${encodeURIComponent(props.precio)}`;
+
+
+
+
+
     return (
 
         <div className={styles.container}>
@@ -90,7 +96,8 @@ export default function Card(props) {
             <div className={styles.ticket_info}>
                 <h4>Semi-Cama</h4>
             </div>
-            <Link to={`/ticket_detail/${props.id}`} className={styles.btn}>Comprar</Link>
+
+            <Link to={url} className={styles.btn}>Comprar</Link>
         </div>
     )
 }

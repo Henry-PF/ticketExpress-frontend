@@ -6,13 +6,7 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom'
 import logo from '../../../assets/logo.png'
 //----------Boostrap----------
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import { FloatingLabel } from 'react-bootstrap';
+import { Button, Container, FloatingLabel, Form, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 //----------React-icons----------
 import { FcGoogle } from 'react-icons/fc';
 //----------Styles----------
@@ -23,13 +17,14 @@ const NavbarLanding = () => {
 
     const dispatch = useDispatch();
 
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState('')
     const [token, setToken] = useState('')
     const [show, setShow] = useState(false);
     const [userData, setUserData] = useState({
         email: "",
         password: "",
     });
+
     const [error, setError] = useState('')
 
     const handleSubmit = async (event) => {
@@ -41,7 +36,7 @@ const NavbarLanding = () => {
                 correo: email,
                 password: password,
             });
-
+            console.log(data.data);
             if (data.error) {
                 Swal.fire({
                     title: data.error,
@@ -52,6 +47,7 @@ const NavbarLanding = () => {
             if (await data.token) {
                 setToken(data)
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('id', data.data.id);
                 localStorage.setItem('nombre', data.data.nombre);
                 localStorage.setItem('apellido', data.data.apellido);
                 localStorage.setItem('correo', data.data.correo);
@@ -84,8 +80,9 @@ const NavbarLanding = () => {
                             navbarScroll
                         >
                             <Nav.Link className={styles.nav_links} href="/">Home</Nav.Link>
-                            <Nav.Link className={styles.nav_links} href="/create_route">Crear Ruta</Nav.Link>
-                            <Nav.Link className={styles.nav_links} href="#">Sobre Nosotros</Nav.Link>
+                            <Nav.Link className={styles.nav_links} href="/contact">Contact</Nav.Link>
+
+                            <Nav.Link className={styles.nav_links} href="/aboutus">Sobre Nosotros</Nav.Link>
                             {
                                 localStorage.getItem('token') || user
                                     ? localStorage.getItem('nombre') ? <BtnUserLoggedIn name={localStorage.getItem('nombre')} /> : <BtnUserLoggedIn name={user?.name.givenName} />
