@@ -9,7 +9,7 @@ import { useParams } from 'react-router';
 
 const BotoneraAseintos = () => {
 
-    const { origen, destino, fecha_salida, hora_salida, hora_llegada, precio } = useParams();
+    const { id, origen, destino, fecha_salida, hora_salida, hora_llegada, precio } = useParams();
 
     const [seats, setSeats] = useState(44);
     const [selectedSeats, setSelectedSeats] = useState([]);
@@ -217,6 +217,7 @@ const BotoneraAseintos = () => {
                     <PassengerDetails />
                 </div>
                 <TicketDetail
+                    id={id}
                     origen={origen}
                     destino={destino}
                     fecha_salida={fecha_salida}

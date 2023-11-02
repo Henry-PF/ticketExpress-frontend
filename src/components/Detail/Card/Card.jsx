@@ -54,11 +54,7 @@ export default function Card(props) {
     // Convierte la fecha de llegada al formato deseado
     const arrivalDateFormatted = arrivalDateTime.format("dddd DD/MM");
 
-    const url = `/ticket_detail/${encodeURIComponent(props.origin)}/${encodeURIComponent(props.destination)}/${encodeURIComponent(props.fecha_salida)}/${encodeURIComponent(props.hora_salida)}/${encodeURIComponent(props.hora_llegada)}/${encodeURIComponent(props.precio)}`;
-
-
-
-
+    const url = `/ticket_detail/${encodeURIComponent(props.id)}/${encodeURIComponent(props.origin)}/${encodeURIComponent(props.destination)}/${encodeURIComponent(props.fecha_salida)}/${encodeURIComponent(props.hora_salida)}/${encodeURIComponent(props.hora_llegada)}/${encodeURIComponent(props.precio)}`;
 
     return (
 
