@@ -91,7 +91,7 @@ const BotoneraAseintos = () => {
             setPassagerData(reservationData);
             console.log('PASAJERO', passagerData);
 
-            const response = await axios.post("http://localhost:3001/payment/create-order", reservationData);
+            const response = await axios.post("https://api-54nh.onrender.com/payment/create-order", reservationData);
             console.log(response);
             const data = await response.data;
             console.log(data);

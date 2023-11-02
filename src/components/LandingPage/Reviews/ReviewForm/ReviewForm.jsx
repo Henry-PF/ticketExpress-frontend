@@ -52,7 +52,7 @@ export default function ReviewForm() {
     setError(null);
     
     axios
-      .post("http://localhost:3001/reviews/create_review", {
+      .post("https://api-54nh.onrender.com/reviews/create_review", {
         id_user: localStorage.getItem("id"),
         puntos: rating,
         contenido: comment,

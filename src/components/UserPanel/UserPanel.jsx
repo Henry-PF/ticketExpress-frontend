@@ -26,7 +26,7 @@ const UserPanel = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const data = await axios.put('http://localhost:3001/usuarios/update_user', user);
+            const data = await axios.put('https://api-54nh.onrender.com/usuarios/update_user', user);
             if (data.status === 200) {
                 Swal.fire({
                     title: data.data.message,
@@ -48,7 +48,7 @@ const UserPanel = () => {
 
 
     useEffect(() => {
-        axios.post('http://localhost:3001/usuarios/getUserCorreo', { email: localStorage.getItem('correo') || JSON.parse(googleEmail).emails[0]?.value })
+        axios.post('https://api-54nh.onrender.com/usuarios/getUserCorreo', { email: localStorage.getItem('correo') || JSON.parse(googleEmail).emails[0]?.value })
             .then(response => setUser({
                 ...user,
                 id: response.data.data.id,

@@ -32,7 +32,7 @@ const NavbarLanding = () => {
         const { email, password } = userData;
 
         try {
-            const { data } = await axios.post('http://localhost:3001/auth/login', {
+            const { data } = await axios.post('https://api-54nh.onrender.com/auth/login', {
                 correo: email,
                 password: password,
             });
@@ -122,7 +122,7 @@ const NavbarLanding = () => {
                             </Button>
 
                         </Form>
-                        <Link to='http://localhost:3001/auth/google' className={styles.btn_google} type="button">
+                        <Link to='https://api-54nh.onrender.com/auth/google' className={styles.btn_google} type="button">
                             <FcGoogle className={styles.google_logo} />
                             Sign in with Google
                         </Link>

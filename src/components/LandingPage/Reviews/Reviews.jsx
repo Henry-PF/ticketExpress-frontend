@@ -35,7 +35,7 @@ const Reviews = () => {
 
   useEffect(() => {
     // Realizar una solicitud GET a la ruta deseada
-    fetch("http://localhost:3001/reviews/get_reviews")
+    fetch("https://api-54nh.onrender.com/reviews/get_reviews")
       .then((response) => response.json())
       .then((data) => {
         setDataReview(data);
