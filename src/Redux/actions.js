@@ -19,7 +19,7 @@ export const hideLoader = () => {
 export const userLogin = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/auth/perfil");
+      const { data } = await axios.get("https://api-54nh.onrender.com/auth/perfil");
       console.log("user", data.user);
       dispatch({
         type: USER_LOGIN,
@@ -34,7 +34,7 @@ export const userLogin = () => {
 export const userRegister = (formData) => async () => {
   console.log(formData);
   try {
-    const response = await axios.post('http://localhost:3001/usuarios', formData);
+    const response = await axios.post('https://api-54nh.onrender.com/usuarios', formData);
     console.log(response.data);
 
   } catch (error) {
@@ -45,7 +45,7 @@ export const userRegister = (formData) => async () => {
 
 export const createRoute = (formData) => async () => {
   try {
-    const response = await axios.post("http://localhost:3001/rutas", formData);
+    const response = await axios.post("https://api-54nh.onrender.com/rutas", formData);
     console.log("Registro exitoso:", response.data);
   } catch (error) {
     console.error("Error en el registro:", error);
@@ -55,7 +55,7 @@ export const createRoute = (formData) => async () => {
 export const getCities = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/terminal/get");
+      const { data } = await axios.get("https://api-54nh.onrender.com/terminal/get");
       dispatch({
         type: GET_TERMINAL,
         payload: data,
@@ -69,7 +69,7 @@ export const getCities = () => {
 export const getRoutes = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get('http://localhost:3001/rutas/getAll');
+      const { data } = await axios.get('https://api-54nh.onrender.com/rutas/getAll');
       dispatch({
         type: GET_ROUTES,
         payload: data,
@@ -84,7 +84,7 @@ export const searchResults = ({ origen, destino, fecha_salida }) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/rutas/filter?origen=${origen}&destino=${destino}&fecha_salida=${fecha_salida}`
+        `https://api-54nh.onrender.com/rutas/filter?origen=${origen}&destino=${destino}&fecha_salida=${fecha_salida}`
       );
       dispatch({
         type: SEARCH_RESULTS,
@@ -100,7 +100,7 @@ export const getContactData = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/usuarios`
+        `https://api-54nh.onrender.com/usuarios`
       );
       dispatch({
         type: GETCONTACTDATA,
@@ -115,7 +115,7 @@ export const getContactData = () => {
 export const getUserByEmail = (email) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('http://localhost:3001/usuarios/getUserCorreo', email);
+      const { data } = await axios.post('https://api-54nh.onrender.com/usuarios/getUserCorreo', email);
       dispatch({
         type: DATA_USER,
         payload: data
