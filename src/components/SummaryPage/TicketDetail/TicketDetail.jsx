@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
 import styles from "./TicketDetail.module.css";
 
-const TicketDetail = () => {
+const TicketDetail = (props) => {
     const { id } = useParams();
 
     const results = useSelector(state => state.results);
 
     const ticket = results.data?.find((result) => result.id == id);
 
-    const hora_salida = new Date(`2000-01-01T${ticket.hora_salida}`);
-    const hora_llegada = new Date(`2000-01-01T${ticket.hora_llegada}`);
+    const hora_salida = new Date(`2000-01-01T${props.hora_salida}`);
+    const hora_llegada = new Date(`2000-01-01T${props.hora_llegada}`);
 
     // Si la hora de llegada es anterior a la hora de salida, ajusta la fecha de llegada al día siguiente
     if (hora_llegada < hora_salida) {
@@ -36,11 +36,11 @@ const TicketDetail = () => {
     moment.locale("es");
 
     // Convierte la fecha de salida y hora de salida al formato deseado
-    const departureDateFormatted = moment(ticket.fecha_salida, "DD/MM/YYYY").format("dddd DD/MM");
-    const hora_salidaFormatted = moment(ticket.hora_salida, "HH:mm").format("HH:mm");
+    const departureDateFormatted = moment(props.fecha_salida, "DD/MM/YYYY").format("dddd DD/MM");
+    const hora_salidaFormatted = moment(props.hora_salida, "HH:mm").format("HH:mm");
 
     // Calcula la fecha y hora de llegada sumando el tiempo de viaje
-    const departureDateTime = moment(ticket.fecha_salida + " " + ticket.hora_salida, "DD/MM/YYYY HH:mm");
+    const departureDateTime = moment(props.fecha_salida + " " + props.hora_salida, "DD/MM/YYYY HH:mm");
     const arrivalDateTime = departureDateTime.clone().add(travelTime, "hours");
 
     // Comprueba si la hora de llegada es anterior a la hora de salida y ajusta la fecha en consecuencia
@@ -59,18 +59,18 @@ const TicketDetail = () => {
                     <Button className={styles.buttons} >Vuelta</Button>
                 </ButtonGroup>
                 <div className={styles.trip}>
-                    <p className={styles.parrafo}>De <span>{ticket.origin}</span></p>
-                    <p className={styles.parrafo}>A <span>{ticket.destination}</span></p>
+                    <p className={styles.parrafo}>De <span>{props.origin}</span></p>
+                    <p className={styles.parrafo}>A <span>{props.destination}</span></p>
                 </div>
                 <div className={styles.divHorarios}>
                     <div className={styles.subDivHorarios}>
                         <p>Horario de Salida</p>
-                        <h5> {ticket.hora_salida} hs</h5>
+                        <h5> {props.hora_salida} hs</h5>
                         <p>{departureDateFormatted}</p>
                     </div>
                     <div className={styles.subDivHorarios}>
                         <p>Horario de Llegada</p>
-                        <h5> {ticket.hora_llegada} hs</h5>
+                        <h5> {props.hora_llegada} hs</h5>
                         <p>{arrivalDateFormatted}</p>
                     </div>
                 </div>
@@ -95,11 +95,15 @@ const TicketDetail = () => {
                         </tr>
                         <tr>
                             <td>Pasajero</td>
-                            <td>1</td>
+                            <td>{props.pasajeros}</td>
                         </tr>
                         <tr>
-                            <td>SubTotal</td>
-                            <td>$ {ticket.precio}</td>
+                            <td>Valor del Boleto</td>
+                            <td>$ {props.precio}</td>
+                        </tr>
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>$ {props.precio * props.pasajeros}</td>
                         </tr>
                     </tbody>
                 </Table>

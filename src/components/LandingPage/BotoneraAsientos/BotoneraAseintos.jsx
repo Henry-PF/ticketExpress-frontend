@@ -4,8 +4,12 @@ import { MdOutlineEventSeat } from 'react-icons/md';
 import { Tabs, Tab } from 'react-bootstrap'
 import PassengerDetails from '../../SummaryPage/PassengerDetails/PassengerDetails';
 import styles from './styles.module.css';
+import TicketDetail from '../../SummaryPage/TicketDetail/TicketDetail';
+import { useParams } from 'react-router';
 
 const BotoneraAseintos = () => {
+
+    const { origen, destino, fecha_salida, hora_salida, hora_llegada, precio } = useParams();
 
     const [seats, setSeats] = useState(44);
     const [selectedSeats, setSelectedSeats] = useState([]);
@@ -78,15 +82,16 @@ const BotoneraAseintos = () => {
 
             const reservationData = {
                 datosPasajeros: passengerDetails,
-                id_ruta: '',
+                id_ruta: 1,
                 id_user: parseInt(localStorage.getItem('id')),
-                monto: 500,
+                monto: precio * selectedSeats.length,
                 viajeIdayVuelta: false
             };
             console.log(reservationData);
             setPassagerData(reservationData);
             console.log('PASAJERO', passagerData);
-            const response = await axios.post("http://localhost:3001/payment/create-order", passagerData);
+
+            const response = await axios.post("http://localhost:3001/payment/create-order", reservationData);
             console.log(response);
             const data = await response.data;
             console.log(data);
@@ -211,6 +216,14 @@ const BotoneraAseintos = () => {
                     <button className={styles.btn_seat} onClick={handleSeatReservation}>Guardar Asiento</button>
                     <PassengerDetails />
                 </div>
+                <TicketDetail
+                    origen={origen}
+                    destino={destino}
+                    fecha_salida={fecha_salida}
+                    hora_salida={hora_salida}
+                    hora_llegada={hora_llegada}
+                    precio={precio}
+                    pasajeros={selectedSeats.length} />
             </div>
 
         </>

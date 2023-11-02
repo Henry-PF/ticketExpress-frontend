@@ -11,6 +11,7 @@ const BtnUserLoggedIn = (props) => {
         localStorage.clear();
         window.location.reload();
         Cookies.remove('userData');
+        window.location.href = "/";
     }
 
     return (
