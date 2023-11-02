@@ -1,12 +1,23 @@
 .gradient-custom {
-    background: -webkit-linear-gradient(left, #3f69f4, #f78e4c);
+    background: -webkit-linear-gradient(left, #3f69f4, rgb(235, 99, 18));
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    height: 100vh;
+   
     }
+
+    .container-form{
+        display: flex;
+        align-items: center; /* Centrar verticalmente */
+width: 100%;    }
     
     .card-custom {
     border-bottom-left-radius: 10% 50%;
     border-top-left-radius: 10% 50%;
     background-color: #f8f9fa ;
     max-height: 370px;
+    padding-top: 10px
     }
     
     

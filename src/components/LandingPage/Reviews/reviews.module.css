@@ -20,7 +20,7 @@
   display: flex;
   justify-content: center;
   /* max-width: 800px; */
-  height: 250px;
+  height: 350px;
 }
 
 .card {
@@ -33,7 +33,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 

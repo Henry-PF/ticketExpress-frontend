@@ -53,7 +53,7 @@ const Reviews = () => {
 
     for (let i = 0; i < numStars; i++) {
       stars.push(
-        <FontAwesomeIcon icon="star" style={{ color: "white" }} key={i} />
+        <FontAwesomeIcon icon="star" style={{ color: "orange" }} key={i} />
       );
     }
 
@@ -74,7 +74,7 @@ const Reviews = () => {
         <div style={{ height: "23px", fontSize: "12px" }}>
           {renderStars(review.puntos)}
         </div>
-        <h2 style={{ height: "23px", fontSize: "12px" }}>
+        <h2 style={{ height: "115px", fontSize: "17px" , color:"white"}}>
           {review.contenido}
         </h2>
       </Card>
@@ -94,7 +94,7 @@ const Reviews = () => {
     console.log(dataReview, 'DATA REVIEW'),
     <div style={{ margin: 0 }}>
       <div className={styles.testimonialsContainer}>
-        <h2 style={{ color: "black", fontSize: "40px", fontWeight: "bolder" }}>
+      <h2 style={{ color: 'var(--bs-heading-color', fontSize: '40px' }}>
           Nuestros Clientes
         </h2>
         <br />
@@ -117,7 +117,7 @@ const Reviews = () => {
         </Carousel>
       </div>
 
-      <ReviewForm />
+      {/* <ReviewForm /> */}
     </div>
   );
 };

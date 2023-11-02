@@ -11,70 +11,71 @@ import {
 } from "mdb-react-ui-kit";
 import "./ReviewForm.css";
 import Rating from "react-rating";
+import axios from "axios";
 
 export default function ReviewForm() {
-    const [rating, setRating] = useState(0); // Estado para la calificación
-    const [comment, setComment] = useState(""); // Estado para el comentario
-    const [data, setData] = useState({
-      id_user: 0, // Inicializa con un valor predeterminado o con el ID del usuario si está disponible
-      puntos: 0,
-      contenido: "",
-    });
-    //BUSCAR COMO FIGURA EN LOCALST
-const userIdFromLocalStorage = localStorage.getItem('userId');
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [data, setData] = useState({
+    id_user: localStorage.getItem("id"),
+    puntos: 0,
+    contenido: "",
+  });
+  const [error, setError] = useState(null);
 
-// Inicializa el estado con el ID del usuario o un valor predeterminado
-const [userId, setUserId] = useState(userIdFromLocalStorage || 0);
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
+    setData({ ...data, puntos: newRating });
+  };
+
+  const handleCommentChange = (e) => {
+    const newComment = e.target.value;
+    setComment(newComment);
+    setData({ ...data, contenido: newComment });
+
+    // Validación en tiempo real
+    if (newComment.trim() === "" || rating === 0) {
+      setError("Los campos no pueden estar vacíos.");
+    } else {
+      setError(null);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     
-    const handleRatingChange = (newRating) => {
-      setRating(newRating);
-      setData({ ...data, puntos: newRating });
-    };
+    if (comment.trim() === "" || rating === 0) {
+      setError("Los campos no pueden estar vacíos.");
+      return; // Detener el envío si hay errores
+    }
     
-    const handleCommentChange = (e) => {
-      const newComment = e.target.value;
-      setComment(newComment);
-      setData({ ...data, contenido: newComment });
-    };
+    setError(null);
     
-    const handleSubmit = () => {
-        // Aquí puedes obtener el ID del usuario, ya sea desde el localStorage o de cualquier otra fuente
-        const userId = localStorage.getItem('userId'); // Reemplaza con la forma en que obtienes el ID del usuario
-      
-        // Actualiza el ID del usuario en el objeto data antes de enviarlo al backend
-        const updatedData = {
-          ...data,
-          id_user: userId,
-        };
-      
-        // Luego, puedes enviar el objeto updatedData al backend a través de la solicitud POST
-        fetch("/tu-endpoint-de-api", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        })
-          .then((response) => {
-            if (response.ok) {
-              // Manejar la respuesta exitosa, redireccionar o mostrar un mensaje al usuario
-            } else {
-              // Manejar errores en la respuesta
-            }
-          })
-          .catch((error) => {
-            // Manejar errores de red o de la petición
-          });
-      };
-      
-    
+    axios
+      .post("http://localhost:3001/reviews/create_review", {
+        id_user: localStorage.getItem("id"),
+        puntos: rating,
+        contenido: comment,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Review enviado");
+          // Restablecer los campos a sus valores iniciales después de enviar
+          setRating(0);
+          setComment("");
+        } else {
+          console.log("Error en la respuesta");
+        }
+      })
+      .catch((error) => {
+        console.log("Review no pudo enviarse");
+      });
+  };
 
   return (
-    console.log(data, 'DATA ENVIADA AL BACK')
-,
     <>
       <div className="mx-auto gradient-custom" style={{ height: "400px" }}>
-        <MDBRow className="pt-3 mx-3">
+        <MDBRow className="mx-3 container-form">
           <MDBCol md="3">
             <div
               className="text-center"
@@ -87,16 +88,21 @@ const [userId, setUserId] = useState(userIdFromLocalStorage || 0);
               <p className="white-text">Ayudanos a mejorar</p>
             </div>
             <div className="text-center">
-              <MDBBtn
-                color="white"
-                rounded
-                className="back-button"
-                onClick={handleSubmit}
-              >
-                Enviar
-              </MDBBtn>
-            </div>
+  <MDBBtn
+    color="white"
+    rounded
+    className="back-button"
+    type="submit"
+    form="miFormulario"
+    onClick={handleSubmit}
+    style={{ width: "150px", height: "40px" }} // Establece el ancho y alto fijo
+  >
+    Enviar
+  </MDBBtn>
+</div>
+
           </MDBCol>
+
           <MDBCol md="9" className="justify-content-center">
             <MDBCard className="card-custom pb-4">
               <MDBCardBody className="mt-0 mx-5">
@@ -106,24 +112,31 @@ const [userId, setUserId] = useState(userIdFromLocalStorage || 0);
                   </MDBTypography>
                 </div>
 
-                <form className="mb-0 d-flex flex-column align-items-center justify-content-center">
-                  {/* ------------------RATING------------------ */}
+                <form className="mb-0 d-flex flex-column align-items-center justify-content-center" id="miFormulario">
                   <div className="mb-4">
-                    <Rating stop={10} />
+                    <Rating
+                      stop={10}
+                      initialRating={rating}
+                      onChange={handleRatingChange}
+                    />
                   </div>
 
-                  {/* ------------COMENTARIO--------------------- */}
                   <div className="mb-4">
                     <MDBTypography tag="h6" className="mb-2">
                       Comentario:
                     </MDBTypography>
                     <MDBInput
-                      type="textarea"
-                      style={{ width: "550px", height: "100px" }}
-                      value={comment}
-                      onChange={handleCommentChange}
-                    />
+  type="textarea"
+  style={{ maxWidth: "700px", width: "500px", height: "100px" }}
+  value={comment}
+  onChange={handleCommentChange}
+/>
+
                   </div>
+
+                  {error && (
+                    <p style={{ color: "red" }}>{error}</p>
+                  )}
                 </form>
               </MDBCardBody>
             </MDBCard>
