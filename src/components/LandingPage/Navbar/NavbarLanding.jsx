@@ -80,7 +80,6 @@ const NavbarLanding = () => {
                             navbarScroll
                         >
                             <Nav.Link className={styles.nav_links} href="/">Home</Nav.Link>
-                            <Nav.Link className={styles.nav_links} href="/create_route">Crear Ruta</Nav.Link>
                             <Nav.Link className={styles.nav_links} href="#">Sobre Nosotros</Nav.Link>
                             {
                                 localStorage.getItem('token') || user

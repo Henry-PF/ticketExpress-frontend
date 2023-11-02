@@ -64,7 +64,7 @@ const PassengerDetails = () => {
 
   const handleClick = async () => {
     const response = await axios.post("http://localhost:3001/payment/create-order", {})
-    const data = await response.data
+    const data = response.data
     const paymentURL = data.links[1]?.href; // URL de pago de PayPal
     window.open(paymentURL, "_blank");
   }

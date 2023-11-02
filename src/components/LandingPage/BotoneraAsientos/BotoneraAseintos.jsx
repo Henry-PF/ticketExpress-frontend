@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MdOutlineEventSeat } from 'react-icons/md';
 import { Tabs, Tab } from 'react-bootstrap'
-import styles from './styles.module.css';
 import PassengerDetails from '../../SummaryPage/PassengerDetails/PassengerDetails';
+import styles from './styles.module.css';
 
 const BotoneraAseintos = () => {
 
@@ -12,9 +12,7 @@ const BotoneraAseintos = () => {
     const [occupiedSeats, setOccupiedSeats] = useState([]);
     const [activeTab, setActiveTab] = useState(0);
     const [seatData, setSeatData] = useState({});
-    console.log(1, seatData);
     const [passagerData, setPassagerData] = useState([])
-    console.log(2, passagerData);
     const seatList = Array.from(Array(seats).keys());
     const half = Math.ceil(seatList.length / 2);
 
@@ -29,16 +27,6 @@ const BotoneraAseintos = () => {
             columnSeats.push(`${String.fromCharCode(65 + column)}${row}`);
         }
         seatMatrix.push(columnSeats);
-    }
-
-    const asientosOcupados = async () => {
-        try {
-            const { data } = await axios.get('http://localhost:3001/asientos');
-            const occupiedSeatNumbers = data.data?.map(asiento => asiento.reservado ? parseInt(asiento.asiento, 10) : null); // Obtén los números de asientos ocupados
-            setOccupiedSeats(occupiedSeatNumbers);
-        } catch (error) {
-            console.error(error);
-        }
     }
 
     const handleSeatClick = (seat) => {
@@ -95,7 +83,7 @@ const BotoneraAseintos = () => {
                 monto: 500,
                 viajeIdayVuelta: false
             };
-
+            console.log(reservationData);
             setPassagerData(reservationData);
             console.log('PASAJERO', passagerData);
             const response = await axios.post("http://localhost:3001/payment/create-order", passagerData);
@@ -120,16 +108,15 @@ const BotoneraAseintos = () => {
         updatedSeatData[seat][fieldName] = value;
         setSeatData(updatedSeatData);
 
-        const passengerIndex = passagerData.findIndex(p => p.asiento === seat.toString());
-        if (passengerIndex !== -1) {
-            const updatedpassagerData = [...passagerData];
-            updatedpassagerData[passengerIndex][fieldName] = value;
-            setPassagerData(updatedpassagerData);
+        const updatedPassagerData = { ...passagerData };
+        if (!updatedPassagerData[seat]) {
+            updatedPassagerData[seat] = {};
         }
+        updatedPassagerData[seat][fieldName] = value;
+        setPassagerData(updatedPassagerData);
     };
 
     useEffect(() => {
-        asientosOcupados();
         isSeatSelected();
 
         // const interval = setInterval(() => {
