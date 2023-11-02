@@ -59,7 +59,7 @@ export default function ReviewForm() {
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log("Review enviado");
+          alert("Review enviado");
           // Restablecer los campos a sus valores iniciales después de enviar
           setRating(0);
           setComment("");
@@ -68,13 +68,13 @@ export default function ReviewForm() {
         }
       })
       .catch((error) => {
-        console.log("Review no pudo enviarse");
+        alert("Review no pudo enviarse");
       });
   };
 
   return (
     <>
-      <div className="mx-auto gradient-custom" style={{ height: "400px" }}>
+      <div className="mx-auto gradient-custom" style={{ height: "100vh" }}>
         <MDBRow className="mx-3 container-form">
           <MDBCol md="3">
             <div
