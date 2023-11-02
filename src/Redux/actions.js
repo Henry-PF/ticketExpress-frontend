@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 import { SHOW_LOADER, HIDE_LOADER, GET_TERMINAL, GET_ROUTES, SEARCH_RESULTS, USER_LOGIN, DATA_USER, GETCONTACTDATA, } from './action-types'
@@ -126,4 +125,3 @@ export const getUserByEmail = (email) => {
     }
   }
 };
-

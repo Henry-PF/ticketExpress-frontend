@@ -6,29 +6,22 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import Reviews from "./components/LandingPage/Reviews/Reviews";
 import Register from "./components/Register/Register";
 import UserPanel from "./components/UserPanel/UserPanel";
-import "./App.css";
-import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
-import TicketDetail from "./components/SummaryPage/TicketDetail/TicketDetail";
+import ReviewForm from "./components/LandingPage/Reviews/ReviewForm/ReviewForm";
 import Summary from "./components/SummaryPage/Summary/Summary";
+import './App.css'
 
 function App() {
   return (
     <div className="App">
       <Routes>
-
-
-        <Route exact path="/reviews" element={<Reviews />} />
-
         <Route exact path="/" element={<Home />} />
         <Route exact path="/results" element={<Trips />} />
         <Route exact path="/register" element={<Register />} />
         <Route path="/ticket_detail/:origen/:destino/:fecha_salida/:hora_salida/:hora_llegada/:precio" element={<Summary />} />
         <Route exact path="/aboutus" element={<AboutUs />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route exact path="/user" element={<UserPanel />} />
-        </Route>
-
+        <Route exact path="/user" element={<UserPanel />} />
+        <Route exact path="/reviews" element={<ReviewForm />} />
       </Routes>
     </div>
   );
